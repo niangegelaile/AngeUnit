@@ -1,0 +1,7 @@
+import java.util.Calendar;
+
+CREATE TABLE person (
+    _id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL
+    );

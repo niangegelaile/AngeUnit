@@ -11,7 +11,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <EditText
             android:id="@+id/et_account"
             android:layout_width="match_parent"
@@ -29,6 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello World!" />
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
     </LinearLayout>
 
 </RelativeLayout>

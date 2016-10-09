@@ -4,20 +4,18 @@ import android.widget.EditText;
 
 import com.example.ange.angeunit.BuildConfig;
 import com.example.ange.angeunit.R;
-import com.example.ange.angeunit.dragger.Api;
+import com.example.ange.angeunit.api.Api;
 import com.example.ange.angeunit.module.login.LoginActivity;
 import com.example.ange.angeunit.module.login.LoginPresenter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 
 /**

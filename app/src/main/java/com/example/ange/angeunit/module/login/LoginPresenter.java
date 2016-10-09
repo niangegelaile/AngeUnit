@@ -1,17 +1,10 @@
 package com.example.ange.angeunit.module.login;
 
-import android.widget.Toast;
-
-import com.example.ange.angeunit.MyApplication;
 import com.example.ange.angeunit.base.RxBasePresenter;
 import com.example.ange.angeunit.base.RxBus;
-import com.example.ange.angeunit.dragger.Api;
-import com.example.ange.angeunit.dragger.ComponentHolder;
+import com.example.ange.angeunit.api.Api;
 import com.example.ange.angeunit.module.login.bean.TokenBean;
 
-import javax.inject.Inject;
-
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
