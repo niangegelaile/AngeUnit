@@ -1,6 +1,5 @@
-package com.example.ange.angeunit.dragger;
+package com.example.ange.angeunit.app;
 
-import com.example.ange.angeunit.base.BaseActivity;
 import com.example.ange.angeunit.module.login.LoginActivity;
 import com.example.ange.angeunit.module.login.LoginPresenter;
 

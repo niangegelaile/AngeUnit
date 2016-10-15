@@ -1,9 +1,9 @@
 package com.example.ange.angeunit.dagger;
 
-import com.example.ange.angeunit.dragger.AppComponent;
-import com.example.ange.angeunit.dragger.AppModule;
-import com.example.ange.angeunit.dragger.ComponentHolder;
-import com.example.ange.angeunit.dragger.DaggerAppComponent;
+import com.example.ange.angeunit.app.AppComponent;
+import com.example.ange.angeunit.app.AppModule;
+import com.example.ange.angeunit.app.ComponentHolder;
+import com.example.ange.angeunit.app.DaggerAppComponent;
 
 import org.robolectric.RuntimeEnvironment;
 

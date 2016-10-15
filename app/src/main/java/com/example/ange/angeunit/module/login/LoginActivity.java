@@ -2,14 +2,9 @@ package com.example.ange.angeunit.module.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +13,9 @@ import com.example.ange.angeunit.base.BaseActivity;
 import com.example.ange.angeunit.base.RxBus;
 import com.example.ange.angeunit.db.DbOpenHelper;
 import com.example.ange.angeunit.db.table.Person;
-import com.example.ange.angeunit.dragger.ComponentHolder;
+import com.example.ange.angeunit.app.ComponentHolder;
 import com.squareup.sqlbrite.BriteDatabase;
-import com.squareup.sqlbrite.SqlBrite;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;

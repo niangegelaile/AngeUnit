@@ -4,10 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.ange.angeunit.dragger.AppComponent;
-import com.example.ange.angeunit.dragger.ComponentHolder;
-
-import butterknife.ButterKnife;
 import rx.subscriptions.CompositeSubscription;
 
 /**
