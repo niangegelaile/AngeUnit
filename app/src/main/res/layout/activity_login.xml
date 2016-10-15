@@ -7,28 +7,40 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#b6e776"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
     tools:context="com.example.ange.angeunit.MainActivity">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:textSize="20sp"
+            android:text="请输入员工姓名，职位："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <EditText
+            android:hint="姓名"
             android:id="@+id/et_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
+            android:hint="职位"
             android:id="@+id/et_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/but_login"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="保存"/>
         <TextView
             android:id="@+id/tv_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!" />
+            android:text="职工列表：" />
         <ListView
             android:id="@+id/lv"
             android:layout_width="match_parent"

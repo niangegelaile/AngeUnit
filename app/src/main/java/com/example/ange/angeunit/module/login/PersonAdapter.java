@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.db.table.Person;
+import com.example.ange.angeunit.db.table.PersonAndPosition;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by Administrator on 2016/10/9.
  */
 public class PersonAdapter extends BaseAdapter {
-    private List<Person> mDatas;
+    private List<PersonAndPosition> mDatas;
     private Context mContext;
     private int mLayoutId;
     private LayoutInflater mLayoutInflater;
@@ -26,7 +27,7 @@ public class PersonAdapter extends BaseAdapter {
         mLayoutInflater=LayoutInflater.from(context);
     }
 
-    public void setDatas( List<Person> datas){
+    public void setDatas( List<PersonAndPosition> datas){
         this.mDatas=datas;
         notifyDataSetChanged();
     }
@@ -53,15 +54,19 @@ public class PersonAdapter extends BaseAdapter {
            view= mLayoutInflater.inflate(mLayoutId,viewGroup,false);
             mViewHolder=new ViewHolder();
             mViewHolder.mTvPhone= (TextView) view.findViewById(R.id.tv_phone);
+            mViewHolder.mTvPosition= (TextView) view.findViewById(R.id.tv_position);
             view.setTag(mViewHolder);
         }else {
             mViewHolder= (ViewHolder) view.getTag();
         }
-        mViewHolder.mTvPhone.setText(mDatas.get(i).phone());
+        mViewHolder.mTvPhone.setText(mDatas.get(i).getPerson().name());
+        mViewHolder.mTvPosition.setText(mDatas.get(i).getPosition().pname());
         return view;
     }
     class ViewHolder{
         TextView mTvPhone;
+        TextView mTvPosition;
+
     }
 
 }

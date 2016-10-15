@@ -1,0 +1,4 @@
+create Table position(
+    pid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    pname TEXT NOT NULL
+);

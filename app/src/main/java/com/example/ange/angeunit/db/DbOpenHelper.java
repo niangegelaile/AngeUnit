@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.ange.angeunit.db.table.Person;
+import com.example.ange.angeunit.db.table.Position;
 import com.example.ange.angeunit.module.login.LoginContract;
 import com.example.ange.angeunit.utils.StringUtil;
 
@@ -22,6 +23,7 @@ public final class DbOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(Position.CREATE_TABLE);
         db.execSQL(Person.CREATE_TABLE);
 
     }
