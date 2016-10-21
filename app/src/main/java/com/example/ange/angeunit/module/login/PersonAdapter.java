@@ -38,7 +38,7 @@ public class PersonAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public PersonAndPosition getItem(int i) {
         return mDatas==null?null:mDatas.get(i);
     }
 

@@ -1,14 +1,21 @@
 package com.example.ange.angeunit.module.login;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.AlteredCharSequence;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ZoomButton;
 
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.base.BaseActivity;
@@ -66,10 +73,23 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         ComponentHolder.getAppComponent().inject(this);
+        bindEvent();
         register();
         adapter=new PersonAdapter(this,R.layout.item_lv_person);
         lv.setAdapter(adapter);
     }
+
+    private void bindEvent() {
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+               PersonAndPosition pp= adapter.getItem(i);
+                tip(pp.getPerson()._id());
+                return false;
+            }
+        });
+    }
+
 
     private void register() {
         Subscription sb = RxBus.getDefault().toObservable(String.class).subscribe(new Action1<String>() {
@@ -79,15 +99,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
         });
         subscriptions.add(sb);
-//        db.createQuery("person","SELECT * FROM person")
-//                .mapToList(Person.RXMAPPER)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<List<Person>>() {
-//            @Override
-//            public void call(List<Person> persons) {
-//                adapter.setDatas(persons);
-//            }
-//        });
+
         db.createQuery(Arrays.asList("person","position"),"SELECT * from person a,position b where a.pid = b.pid")
                 .mapToList(PersonAndPosition.RXMAPPER)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -107,10 +119,39 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         if(TextUtils.isEmpty(name)||TextUtils.isEmpty(position)){
             return;
         }
-        long pid=db.insert(Position.TABLE_NAME,Position.FACTORY.marshal().pname(position).asContentValues());
+       Cursor cursor= db.query("select * from position where "+Position.PNAME+" = "+"\""+position+"\"");
+        long pid;
+        if(cursor==null||cursor.getCount()<1){
+            pid=db.insert(Position.TABLE_NAME,Position.FACTORY.marshal().pname(position).asContentValues());
+        }else {
+            cursor.moveToNext();
+            pid= Db.getLong(cursor,Position.PID);
+            cursor.close();
+        }
         long id = db.insert(Person.TABLE_NAME, Person.FACTORY.marshal().phone("").name(name).pid(pid).asContentValues());
-        Toast.makeText(this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+    }
+    void tip(final long id) {
+        new AlertDialog.Builder(this)
+                .setTitle("删除提示")
+                .setView(getLayoutInflater().inflate(getDialogRes(), null))
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        db.delete(Person.TABLE_NAME,Person._ID +" = ?",String.valueOf(id) );
+                        Toast.makeText(LoginActivity.this, "delete success", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
+                .show();
     }
 
-
+    public int getDialogRes() {
+        return R.layout.dialog_delete_tip;
+    }
 }
