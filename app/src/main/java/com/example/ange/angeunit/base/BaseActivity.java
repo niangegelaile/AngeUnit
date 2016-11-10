@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import rx.subscriptions.CompositeSubscription;
@@ -20,13 +21,10 @@ import rx.subscriptions.CompositeSubscription;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected CompositeSubscription subscriptions;//用于收集订阅
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         buildComponentForInject();
-        subscriptions=new CompositeSubscription();
         acceptIntent(getIntent());
         setSystemBarTint();
     }
@@ -74,12 +72,12 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected abstract void buildComponentForInject();
 
+    protected abstract void loadData();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(subscriptions!=null&&!subscriptions.isUnsubscribed()){
-            subscriptions.unsubscribe();
-        }
+        SubscriptionCollectUtil.popAll();
+
     }
 }

@@ -14,6 +14,7 @@ import com.example.ange.angeunit.db.table.Position;
 import com.example.ange.angeunit.module.login.bean.TokenBean;
 import com.example.ange.angeunit.repository.Repository;
 import com.example.ange.angeunit.utils.Client;
+import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
 import com.squareup.sqlbrite.BriteDatabase;
 
 
@@ -39,12 +40,11 @@ public class LoginPresenter  implements LoginContract.Presenter{
     private final BriteDatabase mDb;
     private final LoginContract.View mView;
 
-    @Inject
+    @Inject//在构造器进行注入
      LoginPresenter(Repository repository, LoginContract.View mView){
         this.api=repository.getmApi();
         this.mDb=repository.getmDb();
         this.mView=mView;
-//        mSubscriptions=new CompositeSubscription();
     }
 
     /**
@@ -75,7 +75,7 @@ public class LoginPresenter  implements LoginContract.Presenter{
 
                     }
                 });
-//        mSubscriptions.add(sb);
+        SubscriptionCollectUtil.push(sb);
     }
 
 

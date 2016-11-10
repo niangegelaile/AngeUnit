@@ -28,6 +28,7 @@ import com.example.ange.angeunit.db.table.Person;
 import com.example.ange.angeunit.app.ComponentHolder;
 import com.example.ange.angeunit.db.table.PersonAndPosition;
 import com.example.ange.angeunit.db.table.Position;
+import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
 import com.squareup.sqlbrite.BriteDatabase;
 
 
@@ -48,22 +49,29 @@ import rx.functions.Func1;
 
 
 /**
- * 首页
+ * 首页:使用dagger注入presenter,
  * Created by liquanan on 2016/10/1.
  */
 public class LoginActivity extends BaseActivity implements LoginContract.View {
+
     @Inject
     LoginPresenter presenter;
+
     @BindView(R.id.et_account)
     EditText etAccount;
+
     @BindView(R.id.et_pass)
     EditText etPass;
+
     @BindView(R.id.but_login)
     Button butLogin;
+
     @BindView(R.id.tv_msg)
     TextView tvMsg;
+
     @BindView(R.id.lv)
     ListView lv;
+
     PersonAdapter adapter;
 
     @Override
@@ -94,6 +102,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         loginComponent.inject(this);
     }
 
+    @Override
+    protected void loadData() {
+
+    }
+
     private void bindEvent() {
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -113,7 +126,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 tvMsg.setText(s);
             }
         });
-        subscriptions.add(sb);
+        SubscriptionCollectUtil.push(sb);
         presenter.queryPersonPosition();
 
     }
@@ -152,6 +165,21 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         this.presenter= (LoginPresenter) presenter;
+    }
+
+    @Override
+    public void loading() {
+
+    }
+
+    @Override
+    public void finishLoading() {
+
+    }
+
+    @Override
+    public void loadFail() {
+
     }
 
     @Override

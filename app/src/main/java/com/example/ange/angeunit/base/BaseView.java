@@ -18,6 +18,24 @@ package com.example.ange.angeunit.base;
 
 public interface BaseView<T> {
 
+    /**
+     * 设置presenter
+     * @param presenter
+     */
     void setPresenter(T presenter);
 
+    /**
+     * 网络加载时
+     */
+    void loading();
+
+    /**
+     * 网络加载完
+     */
+    void finishLoading();
+
+    /**
+     * 加载失败
+     */
+    void loadFail();
 }
