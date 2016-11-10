@@ -3,6 +3,7 @@ package com.example.ange.angeunit.module.login;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomButton;
 
+import com.example.ange.angeunit.MyApplication;
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.base.BaseActivity;
 import com.example.ange.angeunit.base.RxBus;
@@ -46,15 +48,12 @@ import rx.functions.Func1;
 
 
 /**
- * Created by Administrator on 2016/10/1.
+ * 首页
+ * Created by liquanan on 2016/10/1.
  */
 public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Inject
     LoginPresenter presenter;
-    @Inject
-    BriteDatabase db;
-    @Inject
-    DbOpenHelper openHelper;
     @BindView(R.id.et_account)
     EditText etAccount;
     @BindView(R.id.et_pass)
@@ -72,11 +71,27 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        ComponentHolder.getAppComponent().inject(this);
         bindEvent();
         register();
         adapter=new PersonAdapter(this,R.layout.item_lv_person);
         lv.setAdapter(adapter);
+    }
+
+
+
+    @Override
+    protected void acceptIntent(Intent intent) {
+
+    }
+
+    @Override
+    protected void buildComponentForInject() {
+         LoginComponent loginComponent= DaggerLoginComponent
+                    .builder()
+                    .repositoryComponent(((MyApplication)getApplication())
+                    .getmRepositoryComponent())
+                    .loginModule(new LoginModule(this)).build();
+        loginComponent.inject(this);
     }
 
     private void bindEvent() {
@@ -99,38 +114,17 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
         });
         subscriptions.add(sb);
+        presenter.queryPersonPosition();
 
-        db.createQuery(Arrays.asList("person","position"),"SELECT * from person a,position b where a.pid = b.pid")
-                .mapToList(PersonAndPosition.RXMAPPER)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<PersonAndPosition>>() {
-                    @Override
-                    public void call(List<PersonAndPosition> personAndPositions) {
-                        adapter.setDatas(personAndPositions);
-                    }
-                });
     }
 
     @OnClick(R.id.but_login)
     void login() {
         String name = etAccount.getText().toString();
         String position = etPass.getText().toString();
-//        presenter.login(mob, pass);
-        if(TextUtils.isEmpty(name)||TextUtils.isEmpty(position)){
-            return;
-        }
-       Cursor cursor= db.query("select * from position where "+Position.PNAME+" = "+"\""+position+"\"");
-        long pid;
-        if(cursor==null||cursor.getCount()<1){
-            pid=db.insert(Position.TABLE_NAME,Position.FACTORY.marshal().pname(position).asContentValues());
-        }else {
-            cursor.moveToNext();
-            pid= Db.getLong(cursor,Position.PID);
-            cursor.close();
-        }
-        long id = db.insert(Person.TABLE_NAME, Person.FACTORY.marshal().phone("").name(name).pid(pid).asContentValues());
-        Toast.makeText(LoginActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+        presenter.insertInfo(name,position);
     }
+
     void tip(final long id) {
         new AlertDialog.Builder(this)
                 .setTitle("删除提示")
@@ -138,8 +132,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db.delete(Person.TABLE_NAME,Person._ID +" = ?",String.valueOf(id) );
-                        Toast.makeText(LoginActivity.this, "delete success", Toast.LENGTH_SHORT).show();
+                        presenter.deleteInfo(id);
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -153,5 +146,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     public int getDialogRes() {
         return R.layout.dialog_delete_tip;
+    }
+
+
+    @Override
+    public void setPresenter(LoginContract.Presenter presenter) {
+        this.presenter= (LoginPresenter) presenter;
+    }
+
+    @Override
+    public void setPersonInfoView(List<PersonAndPosition> personAndPositions) {
+        adapter.setDatas(personAndPositions);
     }
 }

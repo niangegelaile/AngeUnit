@@ -17,7 +17,7 @@ public class PersonAndPosition {
         public PersonAndPosition call(Cursor cursor) {
             Position position=Position.FACTORY.creator.create(Db.getInt(cursor,Position.PID),Db.getString(cursor,Position.PNAME));
             Person person=Person.FACTORY.creator.create(Db.getInt(cursor,Person._ID),Db.getString(cursor,Person.NAME),
-                    Db.getString(cursor,Person.PHONE),Db.getInt(cursor,Person.PID));
+                    Db.getInt(cursor,Person.PID));
             PersonAndPosition personAndPosition=new PersonAndPosition();
             personAndPosition.setPerson(person);
             personAndPosition.setPosition(position);

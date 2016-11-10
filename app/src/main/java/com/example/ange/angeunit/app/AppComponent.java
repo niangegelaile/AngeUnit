@@ -1,5 +1,8 @@
 package com.example.ange.angeunit.app;
 
+import android.content.Context;
+
+import com.example.ange.angeunit.api.Api;
 import com.example.ange.angeunit.module.login.LoginActivity;
 import com.example.ange.angeunit.module.login.LoginPresenter;
 
@@ -13,7 +16,5 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 @Singleton
 public interface AppComponent {
-
-    void  inject(LoginActivity activity);
-    LoginPresenter loginPresenter();
+    Context getContext();
 }

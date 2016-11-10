@@ -18,9 +18,7 @@ import dagger.Provides;
  * 由dragger构造的提供各种基础类的对象
  * Created by Administrator on 2016/10/1.
  */
-@Module(
-        includes = {DbModule.class, ApiModule.class}
-)
+@Module
 public class AppModule {
 
     private final Context mContext;
@@ -39,10 +37,4 @@ public class AppModule {
     public Context providerContext() {
         return mContext;
     }
-
-    @Provides
-    public LoginPresenter providerLoginPresenter(Api api){
-        return new LoginPresenter(api);
-    }
-
 }

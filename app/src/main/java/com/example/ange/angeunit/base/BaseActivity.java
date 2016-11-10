@@ -1,6 +1,7 @@
 package com.example.ange.angeunit.base;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,14 +15,27 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by Administrator on 2016/10/1.
+ * 自定义activity基类
+ * Created by liquanan on 2016/10/1.
  */
-public class BaseActivity extends AppCompatActivity {
-    protected CompositeSubscription subscriptions;
+public abstract class BaseActivity extends AppCompatActivity {
+
+    protected CompositeSubscription subscriptions;//用于收集订阅
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        buildComponentForInject();
         subscriptions=new CompositeSubscription();
+        acceptIntent(getIntent());
+        setSystemBarTint();
+    }
+
+    /**
+     * 设置沉浸式状态栏
+     *
+     */
+    private void setSystemBarTint(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
         }
@@ -30,6 +44,11 @@ public class BaseActivity extends AppCompatActivity {
         tintManager.setNavigationBarTintEnabled(true);
         tintManager.setTintColor(Color.parseColor("#00000000"));
     }
+
+    /**
+     * 设置沉浸式状态栏
+     * @param on
+     */
     @TargetApi(19)
     private void setTranslucentStatus(boolean on) {
         Window win = getWindow();
@@ -42,6 +61,20 @@ public class BaseActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+
+
+    /**
+     * 处理传递过来的Intent
+     * @param intent
+     */
+    protected abstract void acceptIntent(Intent intent);
+
+    /**
+     * 用于生成component注入presenter
+     */
+    protected abstract void buildComponentForInject();
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
