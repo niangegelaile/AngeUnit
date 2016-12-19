@@ -1,39 +1,25 @@
 package com.example.ange.angeunit.module.login;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.AlteredCharSequence;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ZoomButton;
 
 import com.example.ange.angeunit.MyApplication;
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.base.BaseActivity;
 import com.example.ange.angeunit.base.RxBus;
-import com.example.ange.angeunit.db.Db;
-import com.example.ange.angeunit.db.DbOpenHelper;
-import com.example.ange.angeunit.db.table.Person;
-import com.example.ange.angeunit.app.ComponentHolder;
 import com.example.ange.angeunit.db.table.PersonAndPosition;
-import com.example.ange.angeunit.db.table.Position;
 import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
-import com.squareup.sqlbrite.BriteDatabase;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,11 +27,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observable;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 
 
 /**
@@ -97,7 +80,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
          LoginComponent loginComponent= DaggerLoginComponent
                     .builder()
                     .repositoryComponent(((MyApplication)getApplication())
-                    .getmRepositoryComponent())
+                    .getRepositoryComponent())
                     .loginModule(new LoginModule(this)).build();
         loginComponent.inject(this);
     }

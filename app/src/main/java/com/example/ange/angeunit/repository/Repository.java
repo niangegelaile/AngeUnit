@@ -1,5 +1,6 @@
 package com.example.ange.angeunit.repository;
 
+import com.example.ange.angeunit.SharedPreferences.SharedPreferencesUtil;
 import com.example.ange.angeunit.api.Api;
 import com.squareup.sqlbrite.BriteDatabase;
 
@@ -16,25 +17,29 @@ public class Repository {
     private Api mApi;
 
     private BriteDatabase mDb;
+
+    private SharedPreferencesUtil mSp;
     @Inject
-    public Repository(Api mApi, BriteDatabase mDb) {
+    public Repository(Api mApi, BriteDatabase mDb,SharedPreferencesUtil mSp) {
         this.mApi = mApi;
         this.mDb = mDb;
+        this.mSp=mSp;
     }
 
-    public Api getmApi() {
+    public Api getApi() {
         return mApi;
     }
 
-    public void setmApi(Api mApi) {
-        this.mApi = mApi;
-    }
-
-    public BriteDatabase getmDb() {
+    public BriteDatabase getDb() {
         return mDb;
     }
 
-    public void setmDb(BriteDatabase mDb) {
-        this.mDb = mDb;
+    public SharedPreferencesUtil getSp(){
+        return mSp;
     }
+
+
+
+
+
 }

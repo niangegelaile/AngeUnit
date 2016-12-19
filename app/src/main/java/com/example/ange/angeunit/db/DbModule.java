@@ -13,6 +13,7 @@ import dagger.Provides;
 import rx.schedulers.Schedulers;
 
 /**
+ * 数据库
  * Created by Administrator on 2016/10/9.
  */
 @Module

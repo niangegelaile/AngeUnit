@@ -2,9 +2,7 @@ package com.example.ange.angeunit.module.login;
 
 import android.database.Cursor;
 import android.text.TextUtils;
-import android.widget.Toast;
 
-import com.example.ange.angeunit.base.RxBasePresenter;
 import com.example.ange.angeunit.base.RxBus;
 import com.example.ange.angeunit.api.Api;
 import com.example.ange.angeunit.db.Db;
@@ -13,7 +11,6 @@ import com.example.ange.angeunit.db.table.PersonAndPosition;
 import com.example.ange.angeunit.db.table.Position;
 import com.example.ange.angeunit.module.login.bean.TokenBean;
 import com.example.ange.angeunit.repository.Repository;
-import com.example.ange.angeunit.utils.Client;
 import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
 import com.squareup.sqlbrite.BriteDatabase;
 
@@ -28,7 +25,6 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * 登录presenter
@@ -42,8 +38,8 @@ public class LoginPresenter  implements LoginContract.Presenter{
 
     @Inject//在构造器进行注入
      LoginPresenter(Repository repository, LoginContract.View mView){
-        this.api=repository.getmApi();
-        this.mDb=repository.getmDb();
+        this.api=repository.getApi();
+        this.mDb=repository.getDb();
         this.mView=mView;
     }
 

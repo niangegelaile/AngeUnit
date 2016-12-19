@@ -27,12 +27,6 @@ public class AppModule {
         this.mContext=context;
     }
 
-    @Singleton
-    @Provides
-    public SharedPreferences providerSharedPreferences(Context context){
-        return PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
     @Provides
     public Context providerContext() {
         return mContext;
