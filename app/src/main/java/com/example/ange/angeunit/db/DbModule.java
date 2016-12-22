@@ -38,4 +38,9 @@ public final class DbModule {
     public BriteDatabase provideBriteDatabase(SqlBrite sqlBrite, DbOpenHelper openHelper){
         return sqlBrite.wrapDatabaseHelper(openHelper, Schedulers.io());
     }
+
+    @Provides @Singleton
+    public IDB provideDb(BriteDatabase briteDatabase){
+        return new MDb(briteDatabase);
+    }
 }

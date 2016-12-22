@@ -29,4 +29,5 @@ public abstract class Person implements PersonModel {
                     Db.getInt(cursor,PID));
         }
     };
+    public static final Mapper<Person> MAPPER=new Mapper<>(FACTORY);
 }
