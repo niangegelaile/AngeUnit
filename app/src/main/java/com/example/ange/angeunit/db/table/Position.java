@@ -29,7 +29,7 @@ public  abstract class Position implements PositionModel {
             return FACTORY.creator.create(Db.getInt(cursor,PID),Db.getString(cursor,PNAME));
         }
     };
-
+    public static final Mapper<Position> MAPPER=new Mapper<>(FACTORY);
 
 
 

@@ -2,6 +2,7 @@ package com.example.ange.angeunit.repository;
 
 import com.example.ange.angeunit.SharedPreferences.SharedPreferencesUtil;
 import com.example.ange.angeunit.api.Api;
+import com.example.ange.angeunit.db.IDB;
 import com.squareup.sqlbrite.BriteDatabase;
 
 import javax.inject.Inject;
@@ -16,11 +17,11 @@ public class Repository {
 
     private Api mApi;
 
-    private BriteDatabase mDb;
+    private IDB mDb;
 
     private SharedPreferencesUtil mSp;
     @Inject
-    public Repository(Api mApi, BriteDatabase mDb,SharedPreferencesUtil mSp) {
+    public Repository(Api mApi, IDB mDb,SharedPreferencesUtil mSp) {
         this.mApi = mApi;
         this.mDb = mDb;
         this.mSp=mSp;
@@ -30,7 +31,7 @@ public class Repository {
         return mApi;
     }
 
-    public BriteDatabase getDb() {
+    public IDB getDb() {
         return mDb;
     }
 

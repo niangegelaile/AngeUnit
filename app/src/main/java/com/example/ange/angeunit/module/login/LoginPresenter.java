@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.example.ange.angeunit.base.RxBus;
 import com.example.ange.angeunit.api.Api;
 import com.example.ange.angeunit.db.Db;
+import com.example.ange.angeunit.db.IDB;
 import com.example.ange.angeunit.db.table.Person;
 import com.example.ange.angeunit.db.table.PersonAndPosition;
 import com.example.ange.angeunit.db.table.Position;
@@ -15,6 +16,7 @@ import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
 import com.squareup.sqlbrite.BriteDatabase;
 
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +35,7 @@ import rx.schedulers.Schedulers;
 public class LoginPresenter  implements LoginContract.Presenter{
 
     private final Api api;
-    private final BriteDatabase mDb;
+    private final IDB mDb;
     private final LoginContract.View mView;
 
     @Inject//在构造器进行注入
@@ -77,7 +79,7 @@ public class LoginPresenter  implements LoginContract.Presenter{
 
     @Override
     public void queryPersonPosition() {
-                mDb.createQuery(Arrays.asList("person","position"),"SELECT * from person a,position b where a.pid = b.pid")
+                mDb.getBriteDatabase().createQuery(Arrays.asList("person","position"),"SELECT * from person a,position b where a.pid = b.pid")
                 .mapToList(PersonAndPosition.RXMAPPER)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<PersonAndPosition>>() {
@@ -93,20 +95,19 @@ public class LoginPresenter  implements LoginContract.Presenter{
         if(TextUtils.isEmpty(name)||TextUtils.isEmpty(position)){
             return;
         }
-        Cursor cursor= mDb.query("select * from position where "+ Position.PNAME+" = "+"\""+position+"\"");
+        List<Position> positions=null;
+        positions= mDb.find(Position.class,"select * from position where "+ Position.PNAME+" = "+"\""+position+"\"");
         long pid;
-        if(cursor==null||cursor.getCount()<1){
-            pid=mDb.insert(Position.TABLE_NAME,Position.FACTORY.marshal().pname(position).asContentValues());
+        if(positions==null||positions.size()<1){
+            pid=mDb.add(Position.TABLE_NAME,Position.FACTORY.marshal().pname(position).asContentValues());
         }else {
-            cursor.moveToNext();
-            pid= Db.getLong(cursor,Position.PID);
-            cursor.close();
+            pid= positions.get(0).pid();
         }
-        long id = mDb.insert(Person.TABLE_NAME, Person.FACTORY.marshal().name(name).pid(pid).asContentValues());
+        long id = mDb.add(Person.TABLE_NAME, Person.FACTORY.marshal().name(name).pid(pid).asContentValues());
     }
 
     @Override
     public void deleteInfo(long id) {
-        mDb.delete(Person.TABLE_NAME,Person._ID +" = ?",String.valueOf(id) );
+        mDb.delete(Person.TABLE_NAME,Person._ID +" = ?",String.valueOf(id));
     }
 }
