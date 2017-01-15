@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ange.angeunit">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -10,12 +11,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".module.login.LoginActivity">
+
+        </activity>
+        <activity android:name=".module.baidumap.BaiduMapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+    <service android:name=".module.baidumap.QueryLocationService"/>
+
+        <!--百度鹰眼 start-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="${BAIDU_APIKEY}" />
+
+        <!--百度鹰眼 end-->
+
+
     </application>
 
 </manifest>

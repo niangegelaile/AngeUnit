@@ -2,6 +2,7 @@ package com.example.ange.angeunit;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.example.ange.angeunit.api.ApiModule;
 import com.example.ange.angeunit.app.AppComponent;
 import com.example.ange.angeunit.app.AppModule;
@@ -45,6 +46,7 @@ public class MyApplication extends Application {
                 .imageModule(new ImageModule(new MyGilde()))
                 .build();
         mImageUtil=imageComponent.getImageUtil();
+        SDKInitializer.initialize(this);
     }
 
     public RepositoryComponent getRepositoryComponent() {
