@@ -1,5 +1,6 @@
 package com.example.ange.angeunit.module.baidumap;
 
+import android.app.Application;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
@@ -8,6 +9,7 @@ import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
+import com.example.ange.angeunit.base.RxBus;
 import com.example.ange.angeunit.map.DaggerMapComponent;
 import com.example.ange.angeunit.map.MapComponent;
 import com.example.ange.angeunit.map.MapModule;
@@ -32,14 +34,18 @@ public class QueryLocationService extends IntentService {
     public QueryLocationService(){
         this("QueryLocationService");
     }
-
-
-
     public QueryLocationService(String name) {
         super(name);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Application application= getApplication();
+        Log.d(TAG,"hashCode"+application.hashCode());
         MapComponent mapComponent = DaggerMapComponent
                 .builder()
-                .mapModule(new MapModule(name,getApplication())).build();
+                .mapModule(new MapModule("QueryLocationService",application)).build();
         mapComponent.inject(this);
     }
 
@@ -74,6 +80,7 @@ public class QueryLocationService extends IntentService {
             public void onReceiveLocation(TraceLocation location) {
                 // TODO Auto-generated method stub
                 Log.d(TAG,location.toString());
+                RxBus.getDefault().post(location);
             }
         });
     }

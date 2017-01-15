@@ -37,15 +37,15 @@ public final class MapModule {
     private final static int protocolType=0;
 
     private final Context mContext;
-    @Provides
-    public Context providerContext() {
-        return mContext;
-    }
+
     public MapModule(String entityName,Context mContext){
         this.entityName=entityName;
         this.mContext=mContext;
     }
-
+    @Provides
+    public Context providerContext() {
+        return mContext;
+    }
     /**
      *初始化轨迹服务客户端
      * @param context

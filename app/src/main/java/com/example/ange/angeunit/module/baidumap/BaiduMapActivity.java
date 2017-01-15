@@ -3,10 +3,14 @@ package com.example.ange.angeunit.module.baidumap;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
@@ -23,11 +27,12 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
+ * 使用百度地图进行定位
  * Created by Administrator on 2017/1/15 0015.
  */
 
 public class BaiduMapActivity extends BaseActivity {
-
+    private final static String TAG="BaiduMapActivity";
     @BindView(R.id.map)
     MapView map;
     BaiduMap mBaiduMap;
@@ -36,24 +41,18 @@ public class BaiduMapActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baidu_map);
-        if(savedInstanceState!=null){
-            map.onCreate(this,savedInstanceState);
-        }
-
-
         ButterKnife.bind(this);
         mBaiduMap= map.getMap();
         map.showZoomControls(false);
+        if(savedInstanceState!=null){
+            map.onCreate(this,savedInstanceState);
+        }
         Intent intent=new Intent(this,QueryLocationService.class);
         startService(intent);
     }
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
-
         if(sb==null||sb.isUnsubscribed()){
             registerBus();
         }
@@ -100,7 +99,8 @@ public class BaiduMapActivity extends BaseActivity {
                 .subscribe(new Action1<TraceLocation>() {
                     @Override
                     public void call(TraceLocation traceLocation) {
-                        drawRealtimePoint(traceLocation.getLatitude(),traceLocation.getLongitude());
+                        Log.d(TAG,"RXBUS:"+traceLocation.toString());
+                        drawRealTimePoint(traceLocation.getLatitude(),traceLocation.getLongitude());
                     }
                 });
     }
@@ -124,7 +124,7 @@ public class BaiduMapActivity extends BaseActivity {
     /**
      * 显示实时位置
      */
-    public void drawRealtimePoint(double latitude,double longitude) {
+    public void drawRealTimePoint(double latitude,double longitude) {
 
         if (!(Math.abs(latitude - 0.0) < 0.000001 && Math.abs(longitude - 0.0) < 0.000001)) {
             LatLng latLng = new LatLng(latitude, longitude);
@@ -133,6 +133,19 @@ public class BaiduMapActivity extends BaseActivity {
                 realtimeBitmap = BitmapDescriptorFactory
                         .fromResource(R.drawable.icon_gcoding);
             }
+
+            //定义地图状态
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    //要移动的点
+                    .target(latLng)
+                    //放大地图到20倍
+                    .zoom(20)
+                    .build();
+            //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            //改变地图状态
+            mBaiduMap.setMapStatus(mMapStatusUpdate);
              overlayOptions = new MarkerOptions().position(latLng)
                     .icon(realtimeBitmap).zIndex(9).draggable(true);
             mBaiduMap.addOverlay(overlayOptions);
