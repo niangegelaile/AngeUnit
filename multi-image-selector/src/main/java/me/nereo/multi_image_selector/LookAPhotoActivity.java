@@ -33,69 +33,44 @@ public class LookAPhotoActivity extends AppCompatActivity {
     public static final int MODE_SINGLE = 0;
     // Multi choice
     public static final int MODE_MULTI = 1;
-
-    /** Max image size，int，{@link #DEFAULT_IMAGE_SIZE} by default */
-    public static final String EXTRA_SELECT_COUNT = "max_select_count";
-    /** Select mode，{@link #MODE_MULTI} by default */
-    public static final String EXTRA_SELECT_MODE = "select_count_mode";
-    /** Whether show camera，true by default */
-    public static final String EXTRA_SHOW_CAMERA = "show_camera";
-    /** Result data set，ArrayList&lt;String&gt;*/
-    public static final String EXTRA_RESULT = "select_result";
-    /** Original data set */
-    public static final String EXTRA_DEFAULT_SELECTED_LIST = "default_list";
-
-    public static final String INDEX="INDEX";
-
-    // Default image size
+    // 默认图片选择数
     private static final int DEFAULT_IMAGE_SIZE = 9;
+    //当前设置图片选择数
     private int mDefaultCount = DEFAULT_IMAGE_SIZE;
+    //当前选中的图片集合
     private ArrayList<String> resultList = new ArrayList<>();
     private ViewPager mViewPager;
     private PicFragmentAdapter mAdapter;
+    //相册集合
     private ArrayList<Image> pathList;
+    //当前fragment的下标
     private int pos;
     private Button mSubmitButton;
     private CheckBox mCheckBox;
     private LinearLayout mLinearLayoutBack;
     private TextView mTextViewNum_num;
-    public static final int REQUEST_IMAGE=0x99;
+
+    int mode;//当前单选or多选模式
+    boolean isShow;//是否显示拍照按钮
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.MIS_NO_ACTIONBAR);
         setContentView(R.layout.mis_activity_yulanandchoose);
         initView();
+        //设置状态栏颜色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#3399ff"));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.mis_statusbar_color));
         }
         final Intent intent = getIntent();
-        mDefaultCount = intent.getIntExtra(EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
-        final int mode = intent.getIntExtra(EXTRA_SELECT_MODE, MODE_MULTI);
-        final boolean isShow = intent.getBooleanExtra(EXTRA_SHOW_CAMERA, true);
-        if(mode == MODE_MULTI && intent.hasExtra(EXTRA_DEFAULT_SELECTED_LIST)) {
-            resultList = intent.getStringArrayListExtra(EXTRA_DEFAULT_SELECTED_LIST);
-        }
-        pathList= getIntent().getParcelableArrayListExtra("paths");
-        pos=getIntent().getIntExtra(INDEX,0);
+        //获取参数
+        parseIntent(intent);
+
         if(mode == MODE_MULTI){
             updateDoneText(resultList);
             setPosTv();
             mSubmitButton.setVisibility(View.VISIBLE);
-            mSubmitButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(resultList != null && resultList.size() >0){
-                        // Notify success
-                        Intent data = new Intent();
-                        data.putStringArrayListExtra(EXTRA_RESULT, resultList);
-                        setResult(RESULT_OK, data);
-                    }else{
-                        setResult(RESULT_CANCELED);
-                    }
-                    finish();
-                }
-            });
         }else{
             mSubmitButton.setVisibility(View.GONE);
         }
@@ -108,6 +83,23 @@ public class LookAPhotoActivity extends AppCompatActivity {
         }else {
             mCheckBox.setChecked(false);
         }
+    }
+
+
+
+    /**
+     *解析出intent参数
+     * @param intent
+     */
+    private void parseIntent(Intent intent) {
+        mDefaultCount = intent.getIntExtra(Extra.EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
+         mode = intent.getIntExtra(Extra.EXTRA_SELECT_MODE, MODE_MULTI);
+         isShow = intent.getBooleanExtra(Extra.EXTRA_SHOW_CAMERA, true);
+        if(mode == MODE_MULTI && intent.hasExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST)) {
+            resultList = intent.getStringArrayListExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST);
+        }
+        pathList= getIntent().getParcelableArrayListExtra(Extra.EXTRA_DATAS);
+        pos=getIntent().getIntExtra(Extra.INDEX,0);
     }
 
     private void initView() {
@@ -140,7 +132,7 @@ public class LookAPhotoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent("ACTION_PicReceiver");
-                intent.putStringArrayListExtra(EXTRA_RESULT,resultList);
+                intent.putStringArrayListExtra(Extra.EXTRA_RESULT,resultList);
                 sendBroadcast(intent);
                 Intent intentfinish=new Intent(MultiImageSelectorActivity.ACTION_FINISH);
                 sendBroadcast(intentfinish);
@@ -169,19 +161,19 @@ public class LookAPhotoActivity extends AppCompatActivity {
 
             }
         });
+        /**
+         * 返回时，把选中的图片路径传递给上一个页面
+         */
         mLinearLayoutBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.putExtra(LookAPhotoActivity.EXTRA_RESULT,resultList);
-                setResult(RESULT_OK,intent);
-                finish();
+                returnChoiceDatas();
             }
         });
 
     }
     /**
-     * Update done button by select image data
+     * 完成按钮的数据变化
      * @param resultList selected image data
      */
     private void updateDoneText(ArrayList<String> resultList){
@@ -197,20 +189,33 @@ public class LookAPhotoActivity extends AppCompatActivity {
                 getString(R.string.mis_action_done), size, mDefaultCount));
     }
 
+    /**
+     * 选中的图add进结果里
+     * @param path
+     */
     public void onImageSelected(String path) {
-        if(!resultList.contains(path)) {
+        if(!isSelected(path)) {
             resultList.add(path);
         }
         updateDoneText(resultList);
     }
 
-
+    /**
+     * 取消选中，从结果中移除
+     * @param path
+     */
     public void onImageUnselected(String path) {
-        if(resultList.contains(path)){
+        if(isSelected(path)){
             resultList.remove(path);
         }
         updateDoneText(resultList);
     }
+
+    /**
+     * 是否选中
+     * @param path
+     * @return
+     */
     private boolean isSelected(String path){
         return resultList.contains(path);
     }
@@ -218,15 +223,27 @@ public class LookAPhotoActivity extends AppCompatActivity {
         mTextViewNum_num.setText((pos+1)+"/"+pathList.size());
     }
 
+    /**
+     * 返回时，把选中的图片路径传递给上一个页面
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            Intent intent=new Intent();
-            intent.putExtra(LookAPhotoActivity.EXTRA_RESULT,resultList);
-            setResult(RESULT_OK,intent);
-            finish();
+           returnChoiceDatas();
         }
         return true;
     }
 
+    /**
+     * 返回时，把选中的图片路径传递给上一个页面
+     */
+    private void returnChoiceDatas(){
+        Intent intent=new Intent();
+        intent.putExtra(Extra.EXTRA_RESULT,resultList);
+        setResult(RESULT_OK,intent);
+        finish();
+    }
 }

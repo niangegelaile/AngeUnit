@@ -178,34 +178,24 @@ public class MultiImageSelectorFragment extends Fragment {
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                if (mImageAdapter.isShowCamera()) {
-//                    if (i == 0) {
-//                        showCameraAction();
-//                    } else {
-//                        Image image = (Image) adapterView.getAdapter().getItem(i);
-//                        selectImageFromGrid(image, mode);
-//                    }
-//                } else {
-//                    Image image = (Image) adapterView.getAdapter().getItem(i);
-//                    selectImageFromGrid(image, mode);
-//                }
+
                 if(i==0&&mImageAdapter.isShowCamera()){
                     showCameraAction();
                 }else {
                     Intent intent = new Intent(getActivity(), LookAPhotoActivity.class);
                     // 是否显示调用相机拍照
-                    intent.putExtra(LookAPhotoActivity.EXTRA_SHOW_CAMERA, true);
+                    intent.putExtra(Extra.EXTRA_SHOW_CAMERA, true);
                     // 最大图片选择数量
-                    intent.putExtra(LookAPhotoActivity.EXTRA_SELECT_COUNT, selectImageCount());
+                    intent.putExtra(Extra.EXTRA_SELECT_COUNT, selectImageCount());
                     // 设置模式 (支持 单选/MultiImageSelectorActivity.MODE_SINGLE 或者 多选/MultiImageSelectorActivity.MODE_MULTI)
-                    intent.putExtra(LookAPhotoActivity.EXTRA_SELECT_MODE, LookAPhotoActivity.MODE_MULTI);
+                    intent.putExtra(Extra.EXTRA_SELECT_MODE, LookAPhotoActivity.MODE_MULTI);
                     // 默认选择图片,回填选项(支持String ArrayList)
-                    intent.putStringArrayListExtra(LookAPhotoActivity.EXTRA_DEFAULT_SELECTED_LIST, resultList);
-                    intent.putParcelableArrayListExtra("paths",  mCurrentFoldImages);
+                    intent.putStringArrayListExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST, resultList);
+                    intent.putParcelableArrayListExtra(Extra.EXTRA_DATAS,  mCurrentFoldImages);
                     if(mImageAdapter.isShowCamera()){
-                        intent.putExtra(LookAPhotoActivity.INDEX,i-1);
+                        intent.putExtra(Extra.INDEX,i-1);
                     }else {
-                        intent.putExtra(LookAPhotoActivity.INDEX,i);
+                        intent.putExtra(Extra.INDEX,i);
                     }
                     getActivity(). startActivityForResult(intent,MultiImageSelectorActivity. REQUEST_IMAGE);
                 }

@@ -36,18 +36,6 @@ public class MultiImageSelectorActivity extends AppCompatActivity
     // Multi choice
     public static final int MODE_MULTI = 1;
 
-    /** Max image size，int，{@link #DEFAULT_IMAGE_SIZE} by default */
-    public static final String EXTRA_SELECT_COUNT = "max_select_count";
-    /** Select mode，{@link #MODE_MULTI} by default */
-    public static final String EXTRA_SELECT_MODE = "select_count_mode";
-    /** Whether show camera，true by default */
-    public static final String EXTRA_SHOW_CAMERA = "show_camera";
-    /** Result data set，ArrayList&lt;String&gt;*/
-    public static final String EXTRA_RESULT = "select_result";
-    /** Original data set */
-    public static final String EXTRA_DEFAULT_SELECTED_LIST = "default_list";
-
-
     public static final String ACTION_FINISH="ACTION_FINISH";
     // Default image size
     private static final int DEFAULT_IMAGE_SIZE = 9;
@@ -80,11 +68,11 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         }
 
         final Intent intent = getIntent();
-        mDefaultCount = intent.getIntExtra(EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
-        final int mode = intent.getIntExtra(EXTRA_SELECT_MODE, MODE_MULTI);
-        final boolean isShow = intent.getBooleanExtra(EXTRA_SHOW_CAMERA, true);
-        if(mode == MODE_MULTI && intent.hasExtra(EXTRA_DEFAULT_SELECTED_LIST)) {
-            resultList = intent.getStringArrayListExtra(EXTRA_DEFAULT_SELECTED_LIST);
+        mDefaultCount = intent.getIntExtra(Extra.EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
+        final int mode = intent.getIntExtra(Extra.EXTRA_SELECT_MODE, MODE_MULTI);
+        final boolean isShow = intent.getBooleanExtra(Extra.EXTRA_SHOW_CAMERA, true);
+        if(mode == MODE_MULTI && intent.hasExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST)) {
+            resultList = intent.getStringArrayListExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST);
         }
 
         mSubmitButton = (Button) findViewById(R.id.commit);
@@ -97,7 +85,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
                     if(resultList != null && resultList.size() >0){
                         // Notify success
                         Intent data = new Intent();
-                        data.putStringArrayListExtra(EXTRA_RESULT, resultList);
+                        data.putStringArrayListExtra(Extra.EXTRA_RESULT, resultList);
                         setResult(RESULT_OK, data);
                     }else{
                         setResult(RESULT_CANCELED);
@@ -139,18 +127,18 @@ public class MultiImageSelectorActivity extends AppCompatActivity
                 }
                 Intent intent = new Intent(MultiImageSelectorActivity.this, LookAPhotoActivity.class);
                 // 是否显示调用相机拍照
-                intent.putExtra(LookAPhotoActivity.EXTRA_SHOW_CAMERA, true);
+                intent.putExtra(Extra.EXTRA_SHOW_CAMERA, true);
                 // 最大图片选择数量
-                intent.putExtra(LookAPhotoActivity.EXTRA_SELECT_COUNT, mDefaultCount);
+                intent.putExtra(Extra.EXTRA_SELECT_COUNT, mDefaultCount);
                 // 设置模式 (支持 单选/MultiImageSelectorActivity.MODE_SINGLE 或者 多选/MultiImageSelectorActivity.MODE_MULTI)
-                intent.putExtra(LookAPhotoActivity.EXTRA_SELECT_MODE, LookAPhotoActivity.MODE_MULTI);
+                intent.putExtra(Extra.EXTRA_SELECT_MODE, LookAPhotoActivity.MODE_MULTI);
                 // 默认选择图片,回填选项(支持String ArrayList)
-                intent.putStringArrayListExtra(LookAPhotoActivity.EXTRA_DEFAULT_SELECTED_LIST, resultList);
-                ArrayList<Image> images=new ArrayList<Image>();
+                intent.putStringArrayListExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST, resultList);
+                ArrayList<Image> images=new ArrayList<>();
                 for(String s:resultList){
                     images.add(new Image(s," ",0));
                 }
-                intent.putParcelableArrayListExtra("paths",  images);
+                intent.putParcelableArrayListExtra(Extra.EXTRA_DATAS,images);
                 intent.putExtra("index",0);
                 startActivityForResult(intent, REQUEST_IMAGE);
             }
@@ -189,7 +177,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
     public void onSingleImageSelected(String path) {
         Intent data = new Intent();
         resultList.add(path);
-        data.putStringArrayListExtra(EXTRA_RESULT, resultList);
+        data.putStringArrayListExtra(Extra.EXTRA_RESULT, resultList);
         setResult(RESULT_OK, data);
         finish();
     }
@@ -217,7 +205,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(imageFile)));
             Intent data = new Intent();
             resultList.add(imageFile.getAbsolutePath());
-            data.putStringArrayListExtra(EXTRA_RESULT, resultList);
+            data.putStringArrayListExtra(Extra.EXTRA_RESULT, resultList);
             setResult(RESULT_OK, data);
             finish();
         }
@@ -234,7 +222,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         switch (requestCode){
             case  REQUEST_IMAGE:
                 if(resultCode==RESULT_OK){
-                    resultList=data.getStringArrayListExtra(LookAPhotoActivity.EXTRA_RESULT);
+                    resultList=data.getStringArrayListExtra(Extra.EXTRA_RESULT);
                     multiImageSelectorFragment.setDefaultSelect(resultList);
                     updateDoneText(resultList);
                 }
@@ -242,7 +230,6 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         }
     }
     class FinishReceiver extends BroadcastReceiver{
-
         @Override
         public void onReceive(Context context, Intent intent) {
             if(ACTION_FINISH.equals(intent.getAction())){

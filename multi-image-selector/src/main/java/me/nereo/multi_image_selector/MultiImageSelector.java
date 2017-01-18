@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MultiImageSelector {
 
-    public static final String EXTRA_RESULT = MultiImageSelectorActivity.EXTRA_RESULT;
+    public static final String EXTRA_RESULT = Extra.EXTRA_RESULT;
     public  static final int READ_EXTERNAL_STORAGE_REQUEST_CODE =0x11 ;
 
     private boolean mShowCamera = true;
@@ -110,12 +110,12 @@ public class MultiImageSelector {
 
     private Intent createIntent(Context context){
         Intent intent = new Intent(context, MultiImageSelectorActivity.class);
-        intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, mShowCamera);
-        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, mMaxCount);
+        intent.putExtra(Extra.EXTRA_SHOW_CAMERA, mShowCamera);
+        intent.putExtra(Extra.EXTRA_SELECT_COUNT, mMaxCount);
         if(mOriginData != null){
-            intent.putStringArrayListExtra(MultiImageSelectorActivity.EXTRA_DEFAULT_SELECTED_LIST, (ArrayList<String>) mOriginData);
+            intent.putStringArrayListExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST, (ArrayList<String>) mOriginData);
         }
-        intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, mMode);
+        intent.putExtra(Extra.EXTRA_SELECT_MODE, mMode);
         return intent;
     }
 }
