@@ -11,7 +11,6 @@ public class StringUtil {
             sb.append(s);
         }
        return sb.toString();
-
     }
 
     public static String combination(String... s1){
@@ -21,6 +20,4 @@ public class StringUtil {
         }
         return sb.toString();
     }
-
-
 }

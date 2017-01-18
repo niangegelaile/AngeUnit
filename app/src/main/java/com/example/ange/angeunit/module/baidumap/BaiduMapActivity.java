@@ -115,10 +115,7 @@ public class BaiduMapActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void loadData() {
 
-    }
     BitmapDescriptor realtimeBitmap;
     MarkerOptions overlayOptions;
     /**

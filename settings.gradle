@@ -1,1 +1,1 @@
-include ':app', ':baidu_map_sdk'
+include ':app', ':baidu_map_sdk', ':multi-image-selector'

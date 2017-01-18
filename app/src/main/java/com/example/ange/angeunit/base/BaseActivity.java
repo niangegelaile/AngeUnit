@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -72,12 +73,18 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected abstract void buildComponentForInject();
 
-    protected abstract void loadData();
+    /**
+     * 提示，并根据code 作不同的操作
+     * @param msg
+     * @param code
+     */
+    protected void showTip(String msg,int code){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         SubscriptionCollectUtil.popAll();
-
     }
 }

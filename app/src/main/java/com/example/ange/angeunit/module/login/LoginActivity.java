@@ -85,10 +85,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         loginComponent.inject(this);
     }
 
-    @Override
-    protected void loadData() {
-
-    }
 
     private void bindEvent() {
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
