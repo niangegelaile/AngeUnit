@@ -1,5 +1,6 @@
 package com.example.ange.angeunit.module.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.base.BaseActivity;
 import com.example.ange.angeunit.module.baidumap.BaiduMapActivity;
 import com.example.ange.angeunit.module.login.LoginActivity;
+import com.tencent.android.tpush.XGPushManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,14 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        // 开启logcat输出，方便debug，发布时请关闭
+        // XGPushConfig.enableDebug(this, true);
+    // 如果需要知道注册是否成功，请使用registerPush(getApplicationContext(), XGIOperateCallback)带callback版本
+    // 如果需要绑定账号，请使用registerPush(getApplicationContext(),account)版本
+    // 具体可参考详细的开发指南
+    // 传递的参数为ApplicationContext
+        Context context = getApplicationContext();
+        XGPushManager.registerPush(context);
     }
 
     @Override

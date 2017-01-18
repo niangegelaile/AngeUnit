@@ -15,9 +15,15 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.TraceLocation;
+import com.example.ange.angeunit.MyApplication;
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.base.BaseActivity;
 import com.example.ange.angeunit.base.RxBus;
+import com.example.ange.angeunit.map.DaggerMapComponent;
+import com.example.ange.angeunit.map.MapComponent;
+import com.example.ange.angeunit.map.MapModule;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,12 +37,14 @@ import rx.schedulers.Schedulers;
  * Created by Administrator on 2017/1/15 0015.
  */
 
-public class BaiduMapActivity extends BaseActivity {
+public class BaiduMapActivity extends BaseActivity implements BaiduMapContract.View{
     private final static String TAG="BaiduMapActivity";
     @BindView(R.id.map)
     MapView map;
     BaiduMap mBaiduMap;
     Subscription sb;
+    @Inject
+    BaiduMapPresenter mPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +120,17 @@ public class BaiduMapActivity extends BaseActivity {
 
     @Override
     protected void buildComponentForInject() {
+        BaiduMapComponent baiduMapComponent= DaggerBaiduMapComponent
+                            .builder()
+                            .repositoryComponent(((MyApplication)getApplication())
+                            .getRepositoryComponent())
+                            .baiduMapModule(new BaiduMapModule(this)).build();
+                baiduMapComponent.inject(this);
+        MapComponent mapComponent = DaggerMapComponent
+                .builder()
+                .mapModule(new MapModule("QueryLocationService",getApplication())).build();
 
+        mPresenter.setLbsTraceClient(mapComponent.getLBSTraceClient());
     }
 
 
@@ -147,5 +165,25 @@ public class BaiduMapActivity extends BaseActivity {
                     .icon(realtimeBitmap).zIndex(9).draggable(true);
             mBaiduMap.addOverlay(overlayOptions);
         }
+    }
+
+    @Override
+    public void setPresenter(BaiduMapContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public void loading() {
+
+    }
+
+    @Override
+    public void finishLoading() {
+
+    }
+
+    @Override
+    public void loadFail() {
+
     }
 }

@@ -47,6 +47,7 @@ public class QueryLocationService extends IntentService {
                 .builder()
                 .mapModule(new MapModule("QueryLocationService",application)).build();
         mapComponent.inject(this);
+        Log.d("LBSTraceClient","hascode QueryLocationService:"+mLbsTraceClient.hashCode());
     }
 
     @Override
