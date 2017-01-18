@@ -60,6 +60,8 @@ android {
             //把变量塞到androidmanifest文件里
             manifestPlaceholders=new HashMap<>()
             manifestPlaceholders.put("BAIDU_APIKEY","$BAIDU_APIKEY")
+            manifestPlaceholders.put("XG_V2_ACCESS_ID","$XG_V2_ACCESS_ID")
+            manifestPlaceholders.put("XG_V2_ACCESS_KEY","$XG_V2_ACCESS_KEY")
             //把变量塞到buildConfig里
             buildConfigField("long","BAIDU_TRACE_SERVICE_ID","$BAIDU_TRACE_SERVICE_ID")
         }
@@ -93,4 +95,5 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile project(':baidu_map_sdk')
+    compile project(':xgpush')
 }
