@@ -31,24 +31,26 @@ import me.nereo.multi_image_selector.bean.Image;
 public class MultiImageSelectorActivity extends AppCompatActivity
         implements MultiImageSelectorFragment.Callback{
 
-    // Single choice
-    public static final int MODE_SINGLE = 0;
-    // Multi choice
-    public static final int MODE_MULTI = 1;
-
     public static final String ACTION_FINISH="ACTION_FINISH";
-    // Default image size
+    //默认图片数
     private static final int DEFAULT_IMAGE_SIZE = 9;
 
     private ArrayList<String> resultList = new ArrayList<>();
-    private Button mSubmitButton;
-    private int mDefaultCount = DEFAULT_IMAGE_SIZE;
-    private RelativeLayout mRelativeLayoutBack;
-    private TextView mTextViewYuLan;
 
     private ArrayList<Image> mCurrentFoldImages;
+
+    private int mDefaultCount = DEFAULT_IMAGE_SIZE;
+
+    private RelativeLayout mRelativeLayoutBack;
+
+    private TextView mTextViewYuLan;
+
+    private Button mSubmitButton;
+
     private MultiImageSelectorFragment multiImageSelectorFragment;
+
     public static final int REQUEST_IMAGE=0x99;
+
     private FinishReceiver mFinishReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,14 +71,14 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
         final Intent intent = getIntent();
         mDefaultCount = intent.getIntExtra(Extra.EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
-        final int mode = intent.getIntExtra(Extra.EXTRA_SELECT_MODE, MODE_MULTI);
+        final int mode = intent.getIntExtra(Extra.EXTRA_SELECT_MODE, SelectMode.MODE_MULTI);
         final boolean isShow = intent.getBooleanExtra(Extra.EXTRA_SHOW_CAMERA, true);
-        if(mode == MODE_MULTI && intent.hasExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST)) {
+        if(mode == SelectMode.MODE_MULTI && intent.hasExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST)) {
             resultList = intent.getStringArrayListExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST);
         }
 
         mSubmitButton = (Button) findViewById(R.id.commit);
-        if(mode == MODE_MULTI){
+        if(mode ==SelectMode. MODE_MULTI){
             updateDoneText(resultList);
             mSubmitButton.setVisibility(View.VISIBLE);
             mSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +101,10 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
         if(savedInstanceState == null){
             Bundle bundle = new Bundle();
-            bundle.putInt(MultiImageSelectorFragment.EXTRA_SELECT_COUNT, mDefaultCount);
-            bundle.putInt(MultiImageSelectorFragment.EXTRA_SELECT_MODE, mode);
-            bundle.putBoolean(MultiImageSelectorFragment.EXTRA_SHOW_CAMERA, isShow);
-            bundle.putStringArrayList(MultiImageSelectorFragment.EXTRA_DEFAULT_SELECTED_LIST, resultList);
+            bundle.putInt(Extra.EXTRA_SELECT_COUNT, mDefaultCount);
+            bundle.putInt(Extra.EXTRA_SELECT_MODE, mode);
+            bundle.putBoolean(Extra.EXTRA_SHOW_CAMERA, isShow);
+            bundle.putStringArrayList(Extra.EXTRA_DEFAULT_SELECTED_LIST, resultList);
             multiImageSelectorFragment= (MultiImageSelectorFragment) Fragment.instantiate(this, MultiImageSelectorFragment.class.getName(), bundle);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.image_grid,multiImageSelectorFragment)
@@ -125,22 +127,18 @@ public class MultiImageSelectorActivity extends AppCompatActivity
                 if(resultList==null||resultList.size()==0){
                     return;
                 }
-                Intent intent = new Intent(MultiImageSelectorActivity.this, LookAPhotoActivity.class);
-                // 是否显示调用相机拍照
-                intent.putExtra(Extra.EXTRA_SHOW_CAMERA, true);
-                // 最大图片选择数量
-                intent.putExtra(Extra.EXTRA_SELECT_COUNT, mDefaultCount);
-                // 设置模式 (支持 单选/MultiImageSelectorActivity.MODE_SINGLE 或者 多选/MultiImageSelectorActivity.MODE_MULTI)
-                intent.putExtra(Extra.EXTRA_SELECT_MODE, LookAPhotoActivity.MODE_MULTI);
-                // 默认选择图片,回填选项(支持String ArrayList)
-                intent.putStringArrayListExtra(Extra.EXTRA_DEFAULT_SELECTED_LIST, resultList);
                 ArrayList<Image> images=new ArrayList<>();
                 for(String s:resultList){
                     images.add(new Image(s," ",0));
                 }
-                intent.putParcelableArrayListExtra(Extra.EXTRA_DATAS,images);
-                intent.putExtra("index",0);
-                startActivityForResult(intent, REQUEST_IMAGE);
+                MultiImageSelector.create()
+                        .count(mDefaultCount)   // 最大图片选择数量
+                        .multi()  // 设置模式 (支持 单选/MultiImageSelectorActivity.MODE_SINGLE 或者 多选/MultiImageSelectorActivity.MODE_MULTI)
+                        .origin(resultList) // 默认选择图片,回填选项(支持String ArrayList)
+                        .showCamera(false) // 是否显示调用相机拍照
+                        .imageDatas(images)
+                        .start(MultiImageSelectorActivity.this,LookAPhotoActivity.class,REQUEST_IMAGE);
+
             }
         });
     }

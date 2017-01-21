@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.nereo.multi_image_selector.MultiImageSelector;
+import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 /**
  * Created by liquanan on 2017/1/15.
@@ -72,13 +73,13 @@ public class MainActivity extends BaseActivity {
                 startActivity(intentMap);
                 break;
             case R.id.but_photo:
-                MultiImageSelector.create(this)
+                MultiImageSelector.create()
                         .showCamera(true) // 是否显示相机. 默认为显示
-                .count(9) // 最大选择图片数量, 默认为9. 只有在选择模式为多选时有效
-                .single() // 单选模式
-//                    .multi() // 多选模式, 默认模式;
-                    .origin(imgsHolder) // 默认已选择图片. 只有在选择模式为多选时有效
-                    .start(this, REQUEST_IMAGE);
+                        .count(9) // 最大选择图片数量, 默认为9. 只有在选择模式为多选时有效
+                        .single() // 单选模式
+//                      .multi() // 多选模式, 默认模式;
+                        .origin(imgsHolder) // 默认已选择图片. 只有在选择模式为多选时有效
+                        .start(this, MultiImageSelectorActivity.class, REQUEST_IMAGE);
 
                 break;
         }

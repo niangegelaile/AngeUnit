@@ -57,48 +57,34 @@ import me.nereo.multi_image_selector.utils.ScreenUtils;
 public class MultiImageSelectorFragment extends Fragment {
 
     public static final String TAG = "MultiImageSelectorFragment";
-
+    //请求权限码
     private static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 110;
+    //请求相机码
     private static final int REQUEST_CAMERA = 100;
 
     private static final String KEY_TEMP_FILE = "key_temp_file";
-
-    // Single choice
-    public static final int MODE_SINGLE = 0;
-    // Multi choice
-    public static final int MODE_MULTI = 1;
-
-    /** Max image size，int，*/
-    public static final String EXTRA_SELECT_COUNT = "max_select_count";
-    /** Select mode，{@link #MODE_MULTI} by default */
-    public static final String EXTRA_SELECT_MODE = "select_count_mode";
-    /** Whether show camera，true by default */
-    public static final String EXTRA_SHOW_CAMERA = "show_camera";
-    /** Original data set */
-    public static final String EXTRA_DEFAULT_SELECTED_LIST = "default_list";
-
-    // loaders
+    // 是一个相册的还是所有相册
     private static final int LOADER_ALL = 0;
     private static final int LOADER_CATEGORY = 1;
-
-    // image result data set
+    // image result data set 选中的图片
     private ArrayList<String> resultList = new ArrayList<>();
-    // folder result data set
+    // folder result data set，相册文件夹
     private ArrayList<Folder> mResultFolder = new ArrayList<>();
-
+    //选中文件夹的图片，还是所有
     private ArrayList<Image> mCurrentFoldImages;
 
-
-
     private GridView mGridView;
+
     private Callback mCallback;
 
     private ImageGridAdapter mImageAdapter;
+
     private FolderAdapter mFolderAdapter;
 
     private ListPopupWindow mFolderPopupWindow;
 
     private TextView mCategoryText;
+
     private View mPopupAnchorView;
 
     private boolean hasFolderGened = false;
@@ -125,14 +111,14 @@ public class MultiImageSelectorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final int mode = selectMode();
-        if(mode == MODE_MULTI) {
-            ArrayList<String> tmp = getArguments().getStringArrayList(EXTRA_DEFAULT_SELECTED_LIST);
+        if(mode == SelectMode.MODE_MULTI) {
+            ArrayList<String> tmp = getArguments().getStringArrayList(Extra.EXTRA_DEFAULT_SELECTED_LIST);
             if(tmp != null && tmp.size()>0) {
                 resultList = tmp;
             }
         }
         mImageAdapter = new ImageGridAdapter(getActivity(), showCamera(), 3);
-        mImageAdapter.showSelectIndicator(mode == MODE_MULTI);
+        mImageAdapter.showSelectIndicator(mode == SelectMode.MODE_MULTI);
 
         mPopupAnchorView = view.findViewById(R.id.footer);
 
@@ -399,7 +385,7 @@ public class MultiImageSelectorFragment extends Fragment {
      */
     private void selectImageFromGrid(Image image, int mode) {
         if(image != null) {
-            if(mode == MODE_MULTI) {
+            if(mode == SelectMode.MODE_MULTI) {
                 if (resultList.contains(image.path)) {
                     resultList.remove(image.path);
                     if (mCallback != null) {
@@ -416,7 +402,7 @@ public class MultiImageSelectorFragment extends Fragment {
                     }
                 }
                 mImageAdapter.select(image);
-            }else if(mode == MODE_SINGLE){
+            }else if(mode == SelectMode.MODE_SINGLE){
                 if(mCallback != null){
                     mCallback.onSingleImageSelected(image.path);
                 }
@@ -531,18 +517,16 @@ public class MultiImageSelectorFragment extends Fragment {
     }
 
     private boolean showCamera(){
-        return getArguments() == null || getArguments().getBoolean(EXTRA_SHOW_CAMERA, true);
+        return getArguments() == null || getArguments().getBoolean(Extra.EXTRA_SHOW_CAMERA, true);
     }
 
     private int selectMode(){
-        return getArguments() == null ? MODE_MULTI : getArguments().getInt(EXTRA_SELECT_MODE);
+        return getArguments() == null ? SelectMode.MODE_MULTI : getArguments().getInt(Extra.EXTRA_SELECT_MODE);
     }
 
     private int selectImageCount(){
-        return getArguments() == null ? 9 : getArguments().getInt(EXTRA_SELECT_COUNT);
+        return getArguments() == null ? 9 : getArguments().getInt(Extra.EXTRA_SELECT_COUNT);
     }
-
-
 
     public void setDefaultSelect(ArrayList<String> resultList){
         this.resultList=resultList;
