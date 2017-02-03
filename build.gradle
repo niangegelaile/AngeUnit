@@ -29,4 +29,6 @@ ext{
     minSdkVersion=15
     compileSdkVersion = 23
     buildToolsVersion = '24.0.0'
+    // App dependencies
+    supportLibraryVersion = '23.1.0'
 }
