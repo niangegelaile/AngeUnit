@@ -1,3 +1,2 @@
-
-include ':app', ':baidu_map_sdk', ':multi-image-selector', ':xgpush'
+include ':app', ':baidu_map_sdk', ':multi-image-selector', ':xgpush', ':easeui'
 

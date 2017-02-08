@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.squareup.sqldelight'
 android {
-
+    useLibrary 'org.apache.http.legacy'
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileOptions {
@@ -62,6 +62,7 @@ android {
             manifestPlaceholders.put("BAIDU_APIKEY","$BAIDU_APIKEY")
             manifestPlaceholders.put("XG_V2_ACCESS_ID","$XG_V2_ACCESS_ID")
             manifestPlaceholders.put("XG_V2_ACCESS_KEY","$XG_V2_ACCESS_KEY")
+            manifestPlaceholders.put("EASEMOB_APPKEY","$EASEMOB_APPKEY")
             //把变量塞到buildConfig里
             buildConfigField("long","BAIDU_TRACE_SERVICE_ID","$BAIDU_TRACE_SERVICE_ID")
         }
@@ -95,4 +96,5 @@ dependencies {
     compile project(':baidu_map_sdk')
     compile project(':multi-image-selector')
     compile project(':xgpush')
+    compile project(':easeui')
 }

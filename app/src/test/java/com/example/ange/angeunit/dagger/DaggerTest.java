@@ -29,7 +29,7 @@ public class DaggerTest {
 //        TestUtil.setupDagger();
 //        LoginPresenter mockLoginPresenter= Mockito.mock(LoginPresenter.class);
 //        Mockito.when(TestUtil.appModule.providerLoginPresenter(any(Api.class))).thenReturn(mockLoginPresenter);
-//        LoginActivity loginActivity= Robolectric.setupActivity(LoginActivity.class);
+//        HLoginActivity loginActivity= Robolectric.setupActivity(HLoginActivity.class);
 //        ((EditText)loginActivity.findViewById(R.id.et_account)).setText("13750523051");
 //        ((EditText)loginActivity.findViewById(R.id.et_pass)).setText("12345678");
 //        loginActivity.findViewById(R.id.but_login).performClick();

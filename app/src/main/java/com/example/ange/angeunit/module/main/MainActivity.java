@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.base.BaseActivity;
 import com.example.ange.angeunit.module.baidumap.BaiduMapActivity;
+import com.example.ange.angeunit.module.hyphenate.HLoginActivity;
 import com.example.ange.angeunit.module.login.LoginActivity;
 import com.tencent.android.tpush.XGPushManager;
 
@@ -61,7 +62,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.but_db, R.id.but_map,R.id.but_photo})
+    @OnClick({R.id.but_db, R.id.but_map,R.id.but_photo,R.id.but_hyphenate})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.but_db:
@@ -81,6 +82,10 @@ public class MainActivity extends BaseActivity {
                         .origin(imgsHolder) // 默认已选择图片. 只有在选择模式为多选时有效
                         .start(this, MultiImageSelectorActivity.class, REQUEST_IMAGE);
 
+                break;
+            case R.id.but_hyphenate:
+                Intent hyphenate=new Intent(this, HLoginActivity.class);
+                startActivity(hyphenate);
                 break;
         }
     }

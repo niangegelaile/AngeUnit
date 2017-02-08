@@ -16,6 +16,7 @@ import com.example.ange.angeunit.image.ImageUtil;
 import com.example.ange.angeunit.image.MyGilde;
 import com.example.ange.angeunit.repository.DaggerRepositoryComponent;
 import com.example.ange.angeunit.repository.RepositoryComponent;
+import com.hyphenate.easeui.controller.EaseUI;
 
 /**
  *
@@ -47,6 +48,7 @@ public class MyApplication extends Application {
                 .build();
         mImageUtil=imageComponent.getImageUtil();
         SDKInitializer.initialize(this);
+        EaseUI.getInstance().init(this, null);
     }
 
     public RepositoryComponent getRepositoryComponent() {
