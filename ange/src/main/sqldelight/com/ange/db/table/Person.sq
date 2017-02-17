@@ -1,0 +1,8 @@
+import java.util.Calendar;
+
+CREATE TABLE person (
+    _id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    pid INTEGER NOT NULL,
+    foreign key(pid) references position(pid)
+    );

@@ -1,8 +1,9 @@
 package com.example.ange.angeunit.module.login;
 
-import com.example.ange.angeunit.base.BasePresenter;
-import com.example.ange.angeunit.base.BaseView;
-import com.example.ange.angeunit.db.table.PersonAndPosition;
+
+import com.ange.base.BasePresenter;
+import com.ange.base.BaseView;
+import com.ange.db.table.PersonAndPosition;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public interface LoginContract {
 
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView<Presenter> {
         /**
          * 显示查询信息
          * @param personAndPositions
@@ -20,7 +21,7 @@ public interface LoginContract {
         void setPersonInfoView(List<PersonAndPosition> personAndPositions);
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
 
         /**
          * 查询信息

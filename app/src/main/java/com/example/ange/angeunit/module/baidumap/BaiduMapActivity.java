@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.ange.base.BaseActivity;
+import com.ange.base.RxBus;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -17,8 +19,6 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.TraceLocation;
 import com.example.ange.angeunit.MyApplication;
 import com.example.ange.angeunit.R;
-import com.example.ange.angeunit.base.BaseActivity;
-import com.example.ange.angeunit.base.RxBus;
 import com.example.ange.angeunit.map.DaggerMapComponent;
 import com.example.ange.angeunit.map.MapComponent;
 import com.example.ange.angeunit.map.MapModule;
@@ -31,6 +31,8 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+
+
 
 /**
  * 使用百度地图进行定位
@@ -173,17 +175,9 @@ public class BaiduMapActivity extends BaseActivity implements BaiduMapContract.V
     }
 
     @Override
-    public void loading() {
+    public void onNoNetWork() {
 
     }
 
-    @Override
-    public void finishLoading() {
 
-    }
-
-    @Override
-    public void loadFail() {
-
-    }
 }

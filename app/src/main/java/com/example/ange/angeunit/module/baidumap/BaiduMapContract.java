@@ -1,7 +1,8 @@
 package com.example.ange.angeunit.module.baidumap;
 
-import com.example.ange.angeunit.base.BasePresenter;
-import com.example.ange.angeunit.base.BaseView;
+
+import com.ange.base.BasePresenter;
+import com.ange.base.BaseView;
 
 /**
  * Created by Administrator on 2017/1/16 0016.

@@ -1,32 +1,21 @@
 package com.example.ange.angeunit.module.login;
 
-import android.database.Cursor;
 import android.text.TextUtils;
 
-import com.example.ange.angeunit.base.RxBus;
-import com.example.ange.angeunit.api.Api;
-import com.example.ange.angeunit.db.Db;
-import com.example.ange.angeunit.db.IDB;
-import com.example.ange.angeunit.db.table.Person;
-import com.example.ange.angeunit.db.table.PersonAndPosition;
-import com.example.ange.angeunit.db.table.Position;
-import com.example.ange.angeunit.module.login.bean.TokenBean;
-import com.example.ange.angeunit.repository.Repository;
-import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
-import com.squareup.sqlbrite.BriteDatabase;
+import com.ange.api.Api;
+import com.ange.db.IDB;
+import com.ange.db.table.Person;
+import com.ange.db.table.PersonAndPosition;
+import com.ange.db.table.Position;
+import com.ange.repository.Repository;
 
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * 登录presenter
@@ -54,26 +43,7 @@ public class LoginPresenter  implements LoginContract.Presenter{
     }
 
     public void login(String account,String password){
-       Subscription sb= api.login(account,password)
-               .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<TokenBean>() {
-                    @Override
-                    public void onCompleted() {
-                        RxBus.getDefault().post("onCompleted");
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        RxBus.getDefault().post(e.toString());
-                    }
-
-                    @Override
-                    public void onNext(TokenBean tokenBean) {
-
-                    }
-                });
-        SubscriptionCollectUtil.push(sb);
     }
 
 

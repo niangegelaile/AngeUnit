@@ -2,21 +2,23 @@ package com.example.ange.angeunit;
 
 import android.app.Application;
 
+import com.ange.api.ApiModule;
+import com.ange.app.AppComponent;
+import com.ange.app.AppModule;
+import com.ange.app.ComponentHolder;
+import com.ange.app.DaggerAppComponent;
+import com.ange.db.DbModule;
+import com.ange.image.DaggerImageComponent;
+import com.ange.image.ImageComponent;
+import com.ange.image.ImageModule;
+import com.ange.image.ImageUtil;
+import com.ange.image.MyImageUtil;
+import com.ange.repository.DaggerRepositoryComponent;
+import com.ange.repository.RepositoryComponent;
 import com.baidu.mapapi.SDKInitializer;
-import com.example.ange.angeunit.api.ApiModule;
-import com.example.ange.angeunit.app.AppComponent;
-import com.example.ange.angeunit.app.AppModule;
-import com.example.ange.angeunit.app.ComponentHolder;
-import com.example.ange.angeunit.app.DaggerAppComponent;
-import com.example.ange.angeunit.db.DbModule;
-import com.example.ange.angeunit.image.DaggerImageComponent;
-import com.example.ange.angeunit.image.ImageComponent;
-import com.example.ange.angeunit.image.ImageModule;
-import com.example.ange.angeunit.image.ImageUtil;
-import com.example.ange.angeunit.image.MyGilde;
-import com.example.ange.angeunit.repository.DaggerRepositoryComponent;
-import com.example.ange.angeunit.repository.RepositoryComponent;
 import com.hyphenate.easeui.controller.EaseUI;
+
+
 
 /**
  *
@@ -44,7 +46,7 @@ public class MyApplication extends Application {
         //图片工具
         ImageComponent imageComponent= DaggerImageComponent
                 .builder()
-                .imageModule(new ImageModule(new MyGilde()))
+                .imageModule(new ImageModule(new MyImageUtil()))
                 .build();
         mImageUtil=imageComponent.getImageUtil();
         SDKInitializer.initialize(this);

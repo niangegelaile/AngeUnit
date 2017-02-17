@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TittleContentView">
+        <attr name="tcv_title" format="string"/>
+        <attr name="tcv_content" format="string"/>
+        <attr name="tcv_canEdit" format="boolean"/>
+        <attr name="tcv_hint" format="string"/>
+        <attr name="tcv_inputType" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="TittleView">
+        <attr name="tittle_title" format="string"/>
+        <attr name="tittle_back" format="boolean"/>
+        <attr name="tittle_save" format="boolean"/>
+    </declare-styleable>
+</resources>

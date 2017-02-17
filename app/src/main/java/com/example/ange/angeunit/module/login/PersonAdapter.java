@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.ange.db.table.PersonAndPosition;
 import com.example.ange.angeunit.R;
-import com.example.ange.angeunit.db.table.Person;
-import com.example.ange.angeunit.db.table.PersonAndPosition;
 
 import java.util.List;
 

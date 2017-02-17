@@ -12,13 +12,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.ange.base.BaseActivity;
+import com.ange.base.RxBus;
+import com.ange.db.table.PersonAndPosition;
+import com.ange.utils.SubscriptionCollectUtil;
 import com.example.ange.angeunit.MyApplication;
 import com.example.ange.angeunit.R;
-import com.example.ange.angeunit.base.BaseActivity;
-import com.example.ange.angeunit.base.RxBus;
-import com.example.ange.angeunit.db.table.PersonAndPosition;
-import com.example.ange.angeunit.utils.SubscriptionCollectUtil;
-
 
 import java.util.List;
 
@@ -29,6 +28,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
 import rx.functions.Action1;
+
+
 
 
 /**
@@ -147,19 +148,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void loading() {
+    public void onNoNetWork() {
 
     }
 
-    @Override
-    public void finishLoading() {
-
-    }
-
-    @Override
-    public void loadFail() {
-
-    }
 
     @Override
     public void setPersonInfoView(List<PersonAndPosition> personAndPositions) {

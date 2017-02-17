@@ -5,11 +5,11 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import com.ange.base.RxBus;
 import com.baidu.trace.LBSTraceClient;
 import com.baidu.trace.OnEntityListener;
 import com.baidu.trace.Trace;
 import com.baidu.trace.TraceLocation;
-import com.example.ange.angeunit.base.RxBus;
 import com.example.ange.angeunit.map.DaggerMapComponent;
 import com.example.ange.angeunit.map.MapComponent;
 import com.example.ange.angeunit.map.MapModule;
