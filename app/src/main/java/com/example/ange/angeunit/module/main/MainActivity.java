@@ -11,6 +11,7 @@ import com.ange.base.BaseActivity;
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.module.baidumap.BaiduMapActivity;
 import com.example.ange.angeunit.module.hyphenate.HLoginActivity;
+import com.example.ange.angeunit.module.image.ImageActivity;
 import com.example.ange.angeunit.module.login.LoginActivity;
 import com.tencent.android.tpush.XGPushManager;
 
@@ -64,7 +65,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.but_db, R.id.but_map,R.id.but_photo,R.id.but_hyphenate})
+    @OnClick({R.id.but_db, R.id.but_map,R.id.but_photo,R.id.but_hyphenate,R.id.but_image})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.but_db:
@@ -88,6 +89,10 @@ public class MainActivity extends BaseActivity {
             case R.id.but_hyphenate:
                 Intent hyphenate=new Intent(this, HLoginActivity.class);
                 startActivity(hyphenate);
+                break;
+            case R.id.but_image:
+                Intent image=new Intent(this, ImageActivity.class);
+                startActivity(image);
                 break;
         }
     }

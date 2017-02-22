@@ -25,6 +25,7 @@
         <activity android:name=".module.hyphenate.ChatActivity"/>
         <activity android:name=".module.hyphenate.HLoginActivity"/>
         <activity android:name=".module.hyphenate.MainActivity"/>
+        <activity android:name=".module.image.ImageActivity"/>
         <!--百度鹰眼 start-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
