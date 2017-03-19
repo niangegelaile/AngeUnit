@@ -16,7 +16,8 @@ import com.ange.base.BaseActivity;
 import com.ange.base.RxBus;
 import com.ange.db.table.PersonAndPosition;
 import com.ange.utils.SubscriptionCollectUtil;
-import com.example.ange.angeunit.MyApplication;
+import com.example.ange.angeunit.app.ComponentHolder;
+import com.example.ange.angeunit.app.MyApplication;
 import com.example.ange.angeunit.R;
 
 import java.util.List;
@@ -78,12 +79,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void buildComponentForInject() {
-         LoginComponent loginComponent= DaggerLoginComponent
-                    .builder()
-                    .repositoryComponent(((MyApplication)getApplication())
-                    .getRepositoryComponent())
-                    .loginModule(new LoginModule(this)).build();
-        loginComponent.inject(this);
+        ComponentHolder.getAppComponent().activityComponent(new LoginModule(this)).inject(this);
     }
 
 

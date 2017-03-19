@@ -81,4 +81,5 @@ dependencies {
     compile project(':ange')
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    testCompile 'junit:junit:4.12'
 }

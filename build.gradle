@@ -3,10 +3,13 @@
 buildscript {
     repositories {
         jcenter()
+
         maven { url "https://jitpack.io" }
+        maven {url "http://maven.aliyun.com/nexus/content/groups/public"}
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.squareup.sqldelight:gradle-plugin:0.4.4'
         // NOTE: Do not place your application dependencies here; they belong
@@ -17,6 +20,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+
+        maven {url "http://maven.aliyun.com/nexus/content/groups/public"}
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
     }
 }
 
@@ -28,7 +34,7 @@ ext{
     targetSdkVersion=22
     minSdkVersion=15
     compileSdkVersion = 23
-    buildToolsVersion = '24.0.0'
+    buildToolsVersion = '25.0.2'
     // App dependencies
     supportLibraryVersion = '23.1.0'
 }

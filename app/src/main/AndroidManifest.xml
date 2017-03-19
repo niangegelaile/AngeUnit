@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name=".MyApplication"
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,9 +22,7 @@
         <activity android:name=".module.login.LoginActivity"/>
         <activity android:name=".module.baidumap.BaiduMapActivity"/>
         <service android:name=".module.baidumap.QueryLocationService"/>
-        <activity android:name=".module.hyphenate.ChatActivity"/>
-        <activity android:name=".module.hyphenate.HLoginActivity"/>
-        <activity android:name=".module.hyphenate.MainActivity"/>
+
         <activity android:name=".module.image.ImageActivity"/>
         <!--百度鹰眼 start-->
         <meta-data

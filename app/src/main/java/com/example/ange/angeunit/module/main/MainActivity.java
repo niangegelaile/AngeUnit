@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.ange.base.BaseActivity;
 import com.example.ange.angeunit.R;
 import com.example.ange.angeunit.module.baidumap.BaiduMapActivity;
-import com.example.ange.angeunit.module.hyphenate.HLoginActivity;
+
 import com.example.ange.angeunit.module.image.ImageActivity;
 import com.example.ange.angeunit.module.login.LoginActivity;
 import com.tencent.android.tpush.XGPushManager;
@@ -87,8 +87,8 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case R.id.but_hyphenate:
-                Intent hyphenate=new Intent(this, HLoginActivity.class);
-                startActivity(hyphenate);
+//                Intent hyphenate=new Intent(this, HLoginActivity.class);
+//                startActivity(hyphenate);
                 break;
             case R.id.but_image:
                 Intent image=new Intent(this, ImageActivity.class);
