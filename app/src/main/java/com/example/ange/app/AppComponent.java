@@ -1,0 +1,29 @@
+package com.example.ange.app;
+
+import android.content.Context;
+
+import com.ange.SharedPreferences.SharedPreferencesModule;
+import com.ange.api.ApiModule;
+import com.ange.db.DbModule;
+import com.example.ange.module.baidumap.BaiduMapComponent;
+import com.example.ange.module.baidumap.BaiduMapModule;
+import com.example.ange.module.login.LoginComponent;
+import com.example.ange.module.login.LoginModule;
+
+import javax.inject.Singleton;
+
+import dagger.Component;
+
+/**
+ * 功能：把资源类放到app组件里，每一个activity组件是app组件的子组件
+ *
+ * Created by ange on 2016/10/1.
+ */
+@Component(modules = {AppModule.class, ApiModule.class, DbModule.class, SharedPreferencesModule.class})
+@Singleton
+public interface AppComponent {
+    Context getContext();
+    LoginComponent activityComponent(LoginModule loginModule);
+    BaiduMapComponent activityComponent(BaiduMapModule baiduMapModule);
+
+}

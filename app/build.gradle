@@ -11,7 +11,7 @@ android {
 
     //默认设置
     defaultConfig {
-        applicationId "com.example.ange.angeunit"
+        applicationId "com.example.ange"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

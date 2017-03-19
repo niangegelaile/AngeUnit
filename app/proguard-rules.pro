@@ -65,10 +65,10 @@
 
 #本地文件
 #-keep class com.example.ange.angeunit.api.** {*;}
-#-keep class com.example.ange.angeunit.app.** {*;}
+#-keep class com.example.ange.app.** {*;}
 #-keep class com.example.ange.angeunit.base.** {*;}
 #-keep class com.example.ange.angeunit.db.** {*;}
-#-keep class com.example.ange.angeunit.module.login.** {*;}
+#-keep class com.example.ange.module.login.** {*;}
 #-keep class com.example.ange.angeunit.utils.** {*;}
 
 #保持第3方jar包不混淆
