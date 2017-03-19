@@ -20,6 +20,7 @@ android {
             // 设置支持的SO库架构
             abiFilters 'armeabi' //, 'x86',  'x86_64'//, 'arm64-v8a','armeabi-v7a'
         }
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     //签名配置
@@ -81,5 +82,14 @@ dependencies {
     compile project(':ange')
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    androidTestCompile 'junit:junit:4.12'
     testCompile 'junit:junit:4.12'
+    androidTestCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile 'org.robolectric:robolectric:3.0'
+//    androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
+//    androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+//        exclude group: 'javax.inject', module: 'javax.inject'
+//        exclude group: 'com.squareup', module: 'javawriter'
+//    }
 }

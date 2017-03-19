@@ -27,7 +27,7 @@ public class LoginPresenter  implements LoginContract.Presenter{
     private final IDB mDb;
     private final LoginContract.View mView;
 
-    @Inject//在构造器进行注入
+//    @Inject//在构造器进行注入
      LoginPresenter(Repository repository, LoginContract.View mView){
         this.api=repository.getApi();
         this.mDb=repository.getDb();
