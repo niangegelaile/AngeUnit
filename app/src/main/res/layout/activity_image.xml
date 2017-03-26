@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/iv"
-        android:background="@color/btn_blue_normal"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

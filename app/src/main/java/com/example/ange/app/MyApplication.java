@@ -9,7 +9,7 @@ import com.ange.image.ImageUtil;
 import com.ange.image.MyImageUtil;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.hyphenate.easeui.controller.EaseUI;
+
 
 
 
@@ -38,7 +38,7 @@ public class MyApplication extends Application {
                 .build();
         mImageUtil=imageComponent.getImageUtil();
         SDKInitializer.initialize(this);
-        EaseUI.getInstance().init(this, null);
+//        EaseUI.getInstance().init(this, null);
     }
     /**
      * 获取图片加载工具

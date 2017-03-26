@@ -1,7 +1,24 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 android {
-    useLibrary 'org.apache.http.legacy'
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    dexOptions {
+        javaMaxHeapSize "4g" //specify the heap size for the dex process
+    }
+//    useLibrary 'org.apache.http.legacy'
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileOptions {
@@ -16,6 +33,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         ndk {
             // 设置支持的SO库架构
             abiFilters 'armeabi' //, 'x86',  'x86_64'//, 'arm64-v8a','armeabi-v7a'
@@ -78,18 +96,28 @@ dependencies {
     compile project(':baidu_map_sdk')
     compile project(':multi-image-selector')
     compile project(':xgpush')
-    compile project(':easeui')
+//    compile project(':easeui')
     compile project(':ange')
-    apt 'com.google.dagger:dagger-compiler:2.0.2'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    androidTestCompile 'junit:junit:4.12'
+    //dagger编译器
+    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    //butterknife编译器
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    compile 'com.android.support:multidex:1.0.0'
+
+    //单元测试、
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile 'org.robolectric:robolectric:3.0'
-//    androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
-//    androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
-//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
-//        exclude group: 'javax.inject', module: 'javax.inject'
-//        exclude group: 'com.squareup', module: 'javawriter'
-//    }
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    testCompile "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    testCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
+    androidTestCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
+    androidTestCompile "org.mockito:mockito-android:$MOCKITO_VERSION"
+    androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
+    androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+        exclude group: 'javax.inject', module: 'javax.inject'
+        exclude group: 'com.squareup', module: 'javawriter'
+    }
+
 }

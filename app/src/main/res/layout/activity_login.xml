@@ -10,7 +10,7 @@
     android:background="#b6e776"
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
-    tools:context="com.example.ange.angeunit.MainActivity">
+    tools:context="com.example.ange.module.login.LoginActivity">
 
     <LinearLayout
         android:orientation="vertical"
