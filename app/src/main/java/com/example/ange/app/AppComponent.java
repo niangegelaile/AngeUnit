@@ -3,8 +3,9 @@ package com.example.ange.app;
 import android.content.Context;
 
 import com.ange.SharedPreferences.SharedPreferencesModule;
-import com.ange.api.ApiModule;
+import com.ange.http.HttpModule;
 import com.ange.db.DbModule;
+import com.example.ange.api.ApiModule;
 import com.example.ange.module.baidumap.BaiduMapComponent;
 import com.example.ange.module.baidumap.BaiduMapModule;
 import com.example.ange.module.login.LoginComponent;
@@ -19,7 +20,7 @@ import dagger.Component;
  *
  * Created by ange on 2016/10/1.
  */
-@Component(modules = {AppModule.class, ApiModule.class, DbModule.class, SharedPreferencesModule.class})
+@Component(modules = {AppModule.class, HttpModule.class, ApiModule.class, DbModule.class, SharedPreferencesModule.class})
 @Singleton
 public interface AppComponent {
     Context getContext();

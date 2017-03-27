@@ -1,8 +1,8 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//    }
+//}
 
 
 apply plugin: 'com.android.application'
@@ -96,7 +96,6 @@ dependencies {
     compile project(':baidu_map_sdk')
     compile project(':multi-image-selector')
     compile project(':xgpush')
-//    compile project(':easeui')
     compile project(':ange')
     //dagger编译器
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"

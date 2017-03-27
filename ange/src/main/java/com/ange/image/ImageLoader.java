@@ -1,7 +1,9 @@
 package com.ange.image;
 
-import android.content.Context;
+
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 /**
  * Created by Administrator on 2017/2/21 0021.
@@ -9,27 +11,10 @@ import android.widget.ImageView;
 
 public class ImageLoader {
 
-
-    private ImageUtil mImageUtil;
-
-    private static ImageLoader mImageLoader;
-
-    public static synchronized ImageLoader getInstance(){
-
-        if(mImageLoader==null){
-            mImageLoader=new ImageLoader();
-        }
-        return mImageLoader;
-    }
-
-
-    private ImageLoader(){
-        ImageComponent imageComponent=DaggerImageComponent.builder().imageModule(new ImageModule(new MyImageUtil())).build();
-        mImageUtil=imageComponent.getImageUtil();
-    }
-
-    public void displayImage(Context context,String url, ImageView imageView){
-        mImageUtil.loadImage(context,imageView,url);
+    public static void displayImage(String url, ImageView imageView){
+            Glide.with(imageView.getContext())
+                    .load(url)
+                    .into(imageView);
     }
 
 }

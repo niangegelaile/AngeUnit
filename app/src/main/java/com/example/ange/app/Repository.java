@@ -1,9 +1,10 @@
-package com.ange.repository;
+package com.example.ange.app;
 
 
 import com.ange.SharedPreferences.SharedPreferencesUtil;
-import com.ange.api.Api;
 import com.ange.db.IDB;
+import com.example.ange.api.Api;
+
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,7 +22,7 @@ public class Repository {
 
     private SharedPreferencesUtil mSp;
     @Inject
-    public Repository(Api mApi, IDB mDb,SharedPreferencesUtil mSp) {
+    public Repository(Api mApi, IDB mDb, SharedPreferencesUtil mSp) {
         this.mApi = mApi;
         this.mDb = mDb;
         this.mSp=mSp;

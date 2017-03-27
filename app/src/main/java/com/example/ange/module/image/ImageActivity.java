@@ -24,10 +24,8 @@ public class ImageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
         ButterKnife.bind(this);
-//        Glide.with(this)
-//                .load("http://p0.qhimg.com/d/360browser/20130204/wallpaper4.jpg")
-//                .into(iv);
-        ImageLoader.getInstance().displayImage(this,"http://p0.qhimg.com/d/360browser/20130204/wallpaper4.jpg",iv);
+
+        ImageLoader.displayImage("http://p0.qhimg.com/d/360browser/20130204/wallpaper4.jpg",iv);
     }
 
     @Override

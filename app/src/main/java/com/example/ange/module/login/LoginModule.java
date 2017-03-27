@@ -2,7 +2,9 @@ package com.example.ange.module.login;
 
 
 
-import com.ange.repository.Repository;
+
+
+import com.example.ange.app.Repository;
 
 import dagger.Module;
 import dagger.Provides;
@@ -28,7 +30,7 @@ public class LoginModule {
     }
 
     @Provides
-    LoginPresenter providePresenter(Repository repository,LoginContract.View view){
+    LoginPresenter providePresenter(Repository repository, LoginContract.View view){
 
         return new LoginPresenter(repository,view);
     }

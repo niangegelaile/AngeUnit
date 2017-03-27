@@ -1,7 +1,10 @@
-package com.ange.api;
+package com.ange.http;
+
+import com.ange.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -19,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by liquanan on 2016/10/9.
  */
 @Module
-public  final class ApiModule {
+public  final class HttpModule {
     /**
      * 提供okhttp
      * @return
@@ -28,7 +31,7 @@ public  final class ApiModule {
     @Singleton
     public OkHttpClient providerOkHttpClient(){
         OkHttpClient.Builder builder=new OkHttpClient.Builder();
-        if (true) {
+        if (BuildConfig.DEBUG) {
             // Log信息拦截器
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -72,23 +75,17 @@ public  final class ApiModule {
      */
     @Singleton
     @Provides
-    public Retrofit providerRetrofit(OkHttpClient okHttpClient, Converter.Factory converFactory, CallAdapter.Factory callAdapterFactory){
+    public Retrofit providerRetrofit(OkHttpClient okHttpClient,
+                                     Converter.Factory converFactory,
+                                     CallAdapter.Factory callAdapterFactory,
+                                     @Named("baseUrl")String baseUrl){
         return new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("http://192.168.1.166:8080/employee/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(converFactory)
                 .addCallAdapterFactory(callAdapterFactory)
                 .build();
     }
 
-    /**
-     * 提供api
-     * @param retrofit
-     * @return
-     */
-    @Singleton
-    @Provides
-    public Api providerApi(Retrofit retrofit){
-        return retrofit.create(Api.class);
-    }
+
 }

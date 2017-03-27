@@ -3,10 +3,11 @@ package com.example.ange.module.baidumap;
 import android.util.Log;
 
 import com.ange.SharedPreferences.SharedPreferencesUtil;
-import com.ange.api.Api;
+import com.example.ange.api.Api;
 import com.ange.db.IDB;
-import com.ange.repository.Repository;
+
 import com.baidu.trace.LBSTraceClient;
+import com.example.ange.app.Repository;
 
 import javax.inject.Inject;
 
