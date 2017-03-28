@@ -14,11 +14,10 @@ import android.widget.TextView;
 
 import com.ange.base.BaseActivity;
 import com.ange.base.RxBus;
-import com.ange.db.table.PersonAndPosition;
 import com.ange.utils.SubscriptionCollectUtil;
 import com.example.ange.R;
 import com.example.ange.app.ComponentHolder;
-
+import com.example.ange.db.PersonAndPosition;
 
 import java.util.List;
 

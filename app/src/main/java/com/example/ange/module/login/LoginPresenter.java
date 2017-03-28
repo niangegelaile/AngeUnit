@@ -2,13 +2,12 @@ package com.example.ange.module.login;
 
 import android.text.TextUtils;
 
-import com.example.ange.api.Api;
 import com.ange.db.IDB;
-import com.ange.db.table.Person;
-import com.ange.db.table.PersonAndPosition;
-import com.ange.db.table.Position;
+import com.example.ange.api.Api;
 import com.example.ange.app.Repository;
-
+import com.example.ange.db.Person;
+import com.example.ange.db.PersonAndPosition;
+import com.example.ange.db.Position;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ange.db.table;
+package com.example.ange.db;
 
 import android.database.Cursor;
 
@@ -14,9 +14,9 @@ public class PersonAndPosition {
     public static final Func1<Cursor, PersonAndPosition> RXMAPPER=new Func1<Cursor, PersonAndPosition>() {
         @Override
         public PersonAndPosition call(Cursor cursor) {
-            Position position=Position.FACTORY.creator.create(Db.getInt(cursor,Position.PID),Db.getString(cursor,Position.PNAME));
-            Person person=Person.FACTORY.creator.create(Db.getInt(cursor,Person._ID),Db.getString(cursor,Person.NAME),
-                    Db.getInt(cursor,Person.PID));
+            Position position= Position.FACTORY.creator.create(Db.getInt(cursor, Position.PID),Db.getString(cursor, Position.PNAME));
+            Person person= Person.FACTORY.creator.create(Db.getInt(cursor, Person._ID),Db.getString(cursor, Person.NAME),
+                    Db.getInt(cursor, Person.PID));
             PersonAndPosition personAndPosition=new PersonAndPosition();
             personAndPosition.setPerson(person);
             personAndPosition.setPosition(position);

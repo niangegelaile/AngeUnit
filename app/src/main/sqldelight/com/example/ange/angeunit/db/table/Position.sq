@@ -1,7 +1,0 @@
-create Table position(
-    pid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    pname TEXT NOT NULL
-);
-
-find_position_by_id:
-select * from position where pid = ?;

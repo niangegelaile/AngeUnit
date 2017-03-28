@@ -3,7 +3,7 @@ package com.example.ange.module.login;
 
 import com.ange.base.BasePresenter;
 import com.ange.base.BaseView;
-import com.ange.db.table.PersonAndPosition;
+import com.example.ange.db.PersonAndPosition;
 
 import java.util.List;
 

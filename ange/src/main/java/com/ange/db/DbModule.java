@@ -1,6 +1,7 @@
 package com.ange.db;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.squareup.sqlbrite.BriteDatabase;
@@ -19,12 +20,11 @@ import rx.schedulers.Schedulers;
 @Module
 public final class DbModule {
 
-    @Singleton
-    @Provides
-    public DbOpenHelper  providerDbOpenHelper(Context context){
-        return new DbOpenHelper(context);
-    }
 
+    @Provides @Singleton
+    public BriteDatabase provideBriteDatabase(SqlBrite sqlBrite, SQLiteOpenHelper openHelper){
+        return sqlBrite.wrapDatabaseHelper(openHelper, Schedulers.io());
+    }
     @Provides @Singleton
     public SqlBrite provideSqlBrite() {
         return SqlBrite.create(new SqlBrite.Logger() {
@@ -34,10 +34,7 @@ public final class DbModule {
             }
         });
     }
-    @Provides @Singleton
-    public BriteDatabase provideBriteDatabase(SqlBrite sqlBrite, DbOpenHelper openHelper){
-        return sqlBrite.wrapDatabaseHelper(openHelper, Schedulers.io());
-    }
+
 
     @Provides @Singleton
     public IDB provideDb(BriteDatabase briteDatabase){

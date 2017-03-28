@@ -1,12 +1,12 @@
-package com.ange.db.table;
+package com.example.ange.db;
 
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 
 import com.ange.db.Db;
+
 import com.google.auto.value.AutoValue;
 
-import dagger.internal.Factory;
 import rx.functions.Func1;
 
 /**
@@ -18,6 +18,7 @@ public abstract class Person implements PersonModel {
         @Override
         public Person create(long _id, @NonNull String name, long pid) {
             return new AutoValue_Person(_id,name,pid);
+
         }
     });
     public final static Func1<Cursor,Person> RXMAPPER=new Func1<Cursor, Person>() {

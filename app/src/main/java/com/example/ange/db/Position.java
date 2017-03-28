@@ -1,12 +1,12 @@
-package com.ange.db.table;
+package com.example.ange.db;
 
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 
 import com.ange.db.Db;
+
 import com.google.auto.value.AutoValue;
 
-import dagger.internal.Factory;
 import rx.functions.Func1;
 
 /**
@@ -18,7 +18,8 @@ public  abstract class Position implements PositionModel {
     public final static Factory<Position> FACTORY=new Factory<>(new Creator<Position>() {
         @Override
         public Position create(long pid, @NonNull String pname) {
-            return new AutoValue_Position(pid,pname);
+          return new AutoValue_Position(pid,pname);
+
         }
     });
 

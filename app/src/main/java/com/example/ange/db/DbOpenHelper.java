@@ -1,11 +1,10 @@
-package com.ange.db;
+package com.example.ange.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ange.db.table.Person;
-import com.ange.db.table.Position;
+
 
 /**
  * Created by Administrator on 2016/10/3.
