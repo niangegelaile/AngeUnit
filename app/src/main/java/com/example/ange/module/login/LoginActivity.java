@@ -18,6 +18,7 @@ import com.ange.utils.SubscriptionCollectUtil;
 import com.example.ange.R;
 import com.example.ange.app.ComponentHolder;
 import com.example.ange.db.PersonAndPosition;
+import com.example.ange.module.common.MvpModule;
 
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void buildComponentForInject() {
-        ComponentHolder.getAppComponent().activityComponent(new LoginModule(this)).inject(this);
+        ComponentHolder.getAppComponent().activityComponent(new MvpModule(this)).inject(this);
     }
 
 

@@ -2,12 +2,14 @@ package com.example.ange.module.login;
 
 import android.text.TextUtils;
 
+import com.ange.base.BaseView;
 import com.ange.db.IDB;
 import com.example.ange.api.Api;
 import com.example.ange.app.Repository;
 import com.example.ange.db.Person;
 import com.example.ange.db.PersonAndPosition;
 import com.example.ange.db.Position;
+import com.example.ange.module.common.MvpPresenter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,17 +23,15 @@ import rx.functions.Action1;
  * 登录presenter
  * Created by liquanan on 2016/10/1.
  */
-public class LoginPresenter  implements LoginContract.Presenter{
+public class LoginPresenter extends MvpPresenter implements LoginContract.Presenter{
 
-    private final Api api;
-    private final IDB mDb;
+
     private final LoginContract.View mView;
 
-//    @Inject//在构造器进行注入
-     LoginPresenter(Repository repository, LoginContract.View mView){
-        this.api=repository.getApi();
-        this.mDb=repository.getDb();
-        this.mView=mView;
+    @Inject//在构造器进行注入
+    LoginPresenter(Repository repository, BaseView mView){
+        super(repository);
+        this.mView=(LoginContract.View)mView;
     }
 
     /**
