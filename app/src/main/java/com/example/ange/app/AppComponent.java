@@ -7,12 +7,8 @@ import com.ange.db.DbModule;
 import com.ange.http.HttpModule;
 import com.example.ange.api.ApiModule;
 import com.example.ange.db.DbOpenModule;
-import com.example.ange.module.baidumap.BaiduMapComponent;
-import com.example.ange.module.baidumap.BaiduMapModule;
 import com.example.ange.module.common.MvpComponent;
 import com.example.ange.module.common.MvpModule;
-import com.example.ange.module.login.LoginComponent;
-import com.example.ange.module.login.LoginModule;
 
 import javax.inject.Singleton;
 
@@ -27,7 +23,5 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
     Context getContext();
-    LoginComponent activityComponent(LoginModule loginModule);
-    BaiduMapComponent activityComponent(BaiduMapModule baiduMapModule);
     MvpComponent activityComponent(MvpModule mvpModule);
 }

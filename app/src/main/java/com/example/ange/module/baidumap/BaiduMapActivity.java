@@ -19,10 +19,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.TraceLocation;
 import com.example.ange.R;
 import com.example.ange.app.ComponentHolder;
-
-import com.example.ange.map.DaggerMapComponent;
-import com.example.ange.map.MapComponent;
-import com.example.ange.map.MapModule;
+import com.example.ange.module.common.MvpModule;
 
 import javax.inject.Inject;
 
@@ -123,12 +120,7 @@ public class BaiduMapActivity extends BaseActivity implements BaiduMapContract.V
 
     @Override
     protected void buildComponentForInject() {
-        ComponentHolder.getAppComponent().activityComponent(new BaiduMapModule(this)).inject(this);
-        MapComponent mapComponent = DaggerMapComponent
-                .builder()
-                .mapModule(new MapModule("QueryLocationService",getApplication())).build();
-
-        mPresenter.setLbsTraceClient(mapComponent.getLBSTraceClient());
+        ComponentHolder.getAppComponent().activityComponent(new MvpModule(this)).inject(this);
     }
 
 
