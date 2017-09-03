@@ -15,13 +15,13 @@ import java.io.ObjectOutputStream;
  * Created by Administrator on 2016/12/19 0019.
  */
 
-public class SharedPreferencesUtil {
+public class Sp {
     public static final String USER="USER";
     public static final String DepartmentBean="DepartmentBean";
     public static  final String LifeHouseBean="LifeHouseBean";
     private SharedPreferences mSharedPreferences;
 
-    public SharedPreferencesUtil(SharedPreferences mSharedPreferences){
+    public Sp(SharedPreferences mSharedPreferences){
         this.mSharedPreferences=mSharedPreferences;
     }
 

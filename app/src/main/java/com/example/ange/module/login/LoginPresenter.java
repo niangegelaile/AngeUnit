@@ -3,9 +3,6 @@ package com.example.ange.module.login;
 import android.text.TextUtils;
 
 import com.ange.base.BaseView;
-import com.ange.db.IDB;
-import com.example.ange.api.Api;
-import com.example.ange.app.Repository;
 import com.example.ange.db.Person;
 import com.example.ange.db.PersonAndPosition;
 import com.example.ange.db.Position;
@@ -28,16 +25,13 @@ public class LoginPresenter extends MvpPresenter implements LoginContract.Presen
 
     private final LoginContract.View mView;
 
-    @Inject//在构造器进行注入
-    LoginPresenter(Repository repository, BaseView mView){
-        super(repository);
+    LoginPresenter( BaseView mView){
+        super();
         this.mView=(LoginContract.View)mView;
     }
-
     /**
      * 该方法会在对象创建后调用
      */
-    @Inject
     void setupListeners() {
         mView.setPresenter(this);
     }

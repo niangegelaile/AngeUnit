@@ -23,6 +23,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public  final class HttpModule {
+
+    private final String baseUrl;
+
+    public HttpModule(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
     /**
      * 提供okhttp
      * @return
@@ -77,8 +84,7 @@ public  final class HttpModule {
     @Provides
     public Retrofit providerRetrofit(OkHttpClient okHttpClient,
                                      Converter.Factory converFactory,
-                                     CallAdapter.Factory callAdapterFactory,
-                                     @Named("baseUrl")String baseUrl){
+                                     CallAdapter.Factory callAdapterFactory){
         return new Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(baseUrl)
@@ -86,6 +92,8 @@ public  final class HttpModule {
                 .addCallAdapterFactory(callAdapterFactory)
                 .build();
     }
+
+
 
 
 }

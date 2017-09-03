@@ -18,7 +18,6 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.TraceLocation;
 import com.example.ange.R;
-import com.example.ange.app.ComponentHolder;
 
 import com.example.ange.map.DaggerMapComponent;
 import com.example.ange.map.MapComponent;
@@ -46,7 +45,7 @@ public class BaiduMapActivity extends BaseActivity implements BaiduMapContract.V
     MapView map;
     BaiduMap mBaiduMap;
     Subscription sb;
-    @Inject
+
     BaiduMapPresenter mPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,7 +122,7 @@ public class BaiduMapActivity extends BaseActivity implements BaiduMapContract.V
 
     @Override
     protected void buildComponentForInject() {
-        ComponentHolder.getAppComponent().activityComponent(new BaiduMapModule(this)).inject(this);
+       mPresenter=new BaiduMapPresenter(this);
         MapComponent mapComponent = DaggerMapComponent
                 .builder()
                 .mapModule(new MapModule("QueryLocationService",getApplication())).build();

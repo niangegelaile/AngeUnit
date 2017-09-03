@@ -12,10 +12,6 @@ import rx.Observable;
  */
 public interface Api {
 
-
-
-
-
     @FormUrlEncoded
     @POST(HttpUrls.UPDATE_PASSWORD)
     Observable<ApiResponse> updatePassword(@Field("p") String jsonParam);

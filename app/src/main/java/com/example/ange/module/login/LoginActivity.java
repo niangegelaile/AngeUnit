@@ -16,7 +16,6 @@ import com.ange.base.BaseActivity;
 import com.ange.base.RxBus;
 import com.ange.utils.SubscriptionCollectUtil;
 import com.example.ange.R;
-import com.example.ange.app.ComponentHolder;
 import com.example.ange.db.PersonAndPosition;
 import com.example.ange.module.common.MvpModule;
 
@@ -39,7 +38,7 @@ import rx.functions.Action1;
  */
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
-    @Inject
+
     LoginPresenter presenter;
 
     @BindView(R.id.et_account)
@@ -79,7 +78,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void buildComponentForInject() {
-        ComponentHolder.getAppComponent().activityComponent(new MvpModule(this)).inject(this);
+        presenter=new LoginPresenter(this);
     }
 
 
@@ -147,8 +146,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void onNoNetWork() {
 
     }
-
-
     @Override
     public void setPersonInfoView(List<PersonAndPosition> personAndPositions) {
         adapter.setDatas(personAndPositions);

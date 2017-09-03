@@ -20,7 +20,11 @@ import rx.schedulers.Schedulers;
 @Module
 public final class DbModule {
 
+    private final  SQLiteOpenHelper openHelper;
 
+    public DbModule(SQLiteOpenHelper openHelper){
+        this.openHelper=openHelper;
+    }
     @Provides @Singleton
     public BriteDatabase provideBriteDatabase(SqlBrite sqlBrite, SQLiteOpenHelper openHelper){
         return sqlBrite.wrapDatabaseHelper(openHelper, Schedulers.io());
@@ -34,10 +38,15 @@ public final class DbModule {
             }
         });
     }
-
-
     @Provides @Singleton
     public IDB provideDb(BriteDatabase briteDatabase){
         return new MDb(briteDatabase);
     }
+
+    @Singleton
+    @Provides
+    public SQLiteOpenHelper providerDbOpenHelper(){
+        return openHelper;
+    }
+
 }

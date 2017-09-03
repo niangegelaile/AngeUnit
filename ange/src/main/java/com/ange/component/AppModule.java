@@ -1,4 +1,4 @@
-package com.example.ange.app;
+package com.ange.component;
 
 import android.content.Context;
 

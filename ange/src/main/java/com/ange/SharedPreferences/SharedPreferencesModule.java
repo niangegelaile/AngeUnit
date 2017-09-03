@@ -22,8 +22,8 @@ public final class SharedPreferencesModule {
     }
     @Singleton
     @Provides
-    public SharedPreferencesUtil providerSharedPreferencesUtil(SharedPreferences sharedPreferences){
-        return new SharedPreferencesUtil(sharedPreferences);
+    public Sp providerSp(SharedPreferences sharedPreferences){
+        return new Sp(sharedPreferences);
     }
 
 }

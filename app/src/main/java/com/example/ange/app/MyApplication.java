@@ -1,9 +1,10 @@
 package com.example.ange.app;
 
 import android.app.Application;
+
+import com.ange.component.ComponentHolder;
 import com.baidu.mapapi.SDKInitializer;
-
-
+import com.example.ange.db.DbOpenHelper;
 
 
 /**
@@ -18,13 +19,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication=this;
-        AppComponent appComponent = DaggerAppComponent
-                .builder()
-                .appModule(new AppModule(this))
-                .build();
-        ComponentHolder.setAppComponent(appComponent);
+        ComponentHolder.init(this,new DbOpenHelper(this),"https://www.baidu.com");
         SDKInitializer.initialize(this);
-//        EaseUI.getInstance().init(this, null);
+
     }
 
 }
