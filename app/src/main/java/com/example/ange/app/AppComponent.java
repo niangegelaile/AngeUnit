@@ -7,8 +7,7 @@ import com.ange.db.DbModule;
 import com.ange.http.HttpModule;
 import com.example.ange.api.ApiModule;
 import com.example.ange.db.DbOpenModule;
-import com.example.ange.module.common.MvpComponent;
-import com.example.ange.module.common.MvpModule;
+
 
 import javax.inject.Singleton;
 
@@ -23,5 +22,5 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
     Context getContext();
-    MvpComponent activityComponent(MvpModule mvpModule);
+    Repository getRepository();
 }

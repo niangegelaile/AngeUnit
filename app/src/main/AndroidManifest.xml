@@ -19,39 +19,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.ange.module.login.LoginActivity"/>
-        <activity android:name="com.example.ange.module.baidumap.BaiduMapActivity"/>
-        <service android:name="com.example.ange.module.baidumap.QueryLocationService"/>
+        <activity android:name="com.example.ange.module.add.AddActivity"/>
+
 
         <activity android:name="com.example.ange.module.image.ImageActivity"/>
-        <!--百度鹰眼 start-->
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="${BAIDU_APIKEY}" />
-        <!--百度鹰眼 end-->
-        <!--信鸽 start-->
-        <!-- 【必须】 通知service，此选项有助于提高抵达率 -->
-        <service
-            android:name="com.tencent.android.tpush.rpc.XGRemoteService"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="com.example.ange.angeunit.PUSH_ACTION" />
-            </intent-filter>
-        </service>
-
-        <!-- 【必须】 请将YOUR_ACCESS_ID修改为APP的AccessId，“21”开头的10位数字，中间没空格 -->
-        <meta-data
-            android:name="XG_V2_ACCESS_ID"
-            android:value="${XG_V2_ACCESS_ID}" />
-        <!-- 【必须】 请将YOUR_ACCESS_KEY修改为APP的AccessKey，“A”开头的12位字符串，中间没空格 -->
-        <meta-data
-            android:name="XG_V2_ACCESS_KEY"
-            android:value="${XG_V2_ACCESS_KEY}" />
-        <!--信鸽 end-->
-        <!-- 设置环信应用的appkey -->
-        <meta-data
-            android:name="EASEMOB_APPKEY"
-            android:value="${EASEMOB_APPKEY}" />
+        <activity android:name=".module.list.ListActivity"/>
     </application>
 
 </manifest>

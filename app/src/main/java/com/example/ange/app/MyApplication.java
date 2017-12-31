@@ -1,7 +1,7 @@
 package com.example.ange.app;
 
 import android.app.Application;
-import com.baidu.mapapi.SDKInitializer;
+
 
 
 
@@ -23,8 +23,7 @@ public class MyApplication extends Application {
                 .appModule(new AppModule(this))
                 .build();
         ComponentHolder.setAppComponent(appComponent);
-        SDKInitializer.initialize(this);
-//        EaseUI.getInstance().init(this, null);
+
     }
 
 }
