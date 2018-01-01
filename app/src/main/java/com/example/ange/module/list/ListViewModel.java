@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.ange.db.IDB;
 import com.example.ange.app.Repository;
+import com.example.ange.db.Person;
 import com.example.ange.db.PersonAndPosition;
 
 import java.util.Arrays;
@@ -43,7 +44,9 @@ public class ListViewModel extends AndroidViewModel{
                 });
     }
 
-
+    public void deleteInfo(long id) {
+        mDb.delete(Person.TABLE_NAME,Person._ID +" = ?",String.valueOf(id));
+    }
 
 
 

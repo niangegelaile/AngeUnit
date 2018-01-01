@@ -26,7 +26,7 @@ public class ListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_list);
         ActivityUtils.replaceFragmentInActivity(getSupportFragmentManager(),obtainViewFragment(),R.id.contentFrame);
         findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override

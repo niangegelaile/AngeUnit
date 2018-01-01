@@ -50,28 +50,7 @@ public class AddActivity extends AppCompatActivity  {
 
     }
 
-    void tip(final long id) {
-        new AlertDialog.Builder(this)
-                .setTitle("删除提示")
-                .setView(getLayoutInflater().inflate(getDialogRes(), null))
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }
-                })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                .show();
-    }
-
-    public int getDialogRes() {
-        return R.layout.dialog_delete_tip;
-    }
 
     public static AddViewModel obtainViewModel(FragmentActivity activity) {
         // Use a Factory to inject dependencies into the ViewModel
