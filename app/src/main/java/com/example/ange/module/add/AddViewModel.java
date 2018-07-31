@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ange.db.Db;
+import com.ange.base.RxBus;
 import com.ange.db.IDB;
 import com.example.ange.app.Repository;
 import com.example.ange.db.Person;
@@ -54,5 +54,9 @@ public class AddViewModel extends AndroidViewModel{
         }
         long id = mDb.add(Person.TABLE_NAME, Person.FACTORY.marshal().name(name.get()).pid(pid).asContentValues());
         Log.e(TAG,"id:"+id);
+        //测试LiveData
+        PersonNew personNew=new PersonNew();
+        personNew.setName(name.get());
+        RxBus.getDefault().post(personNew);
     }
 }

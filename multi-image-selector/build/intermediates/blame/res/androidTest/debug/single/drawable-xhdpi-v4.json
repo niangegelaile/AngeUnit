@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\contacts_address_book_icon_select_normal.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\contacts_address_book_icon_select_normal.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\contacts_address_book_icon_select_selected.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\contacts_address_book_icon_select_selected.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\mis_selector_indicator.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\mis_selector_indicator.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\mis_btn_back.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\mis_btn_back.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\common_icon_arrow_blue_up.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\common_icon_arrow_blue_up.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\mis_ic_menu_back.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\mis_ic_menu_back.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\mis_default_check_s.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\mis_default_check_s.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\common_icon_navbar_select_normal.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\common_icon_navbar_select_normal.png"
+    },
+    {
+        "merged": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\common_icon_navbar_select_selected.png",
+        "source": "C:\\github\\AngeUnit\\multi-image-selector\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\common_icon_navbar_select_selected.png"
+    }
+]

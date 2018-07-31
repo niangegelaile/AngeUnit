@@ -1,6 +1,7 @@
 package com.example.ange.module.list;
 
 import android.app.AlertDialog;
+import android.arch.lifecycle.Observer;
 import android.content.DialogInterface;
 import android.databinding.Observable;
 import android.os.Bundle;
@@ -34,6 +35,15 @@ public class ListFragment extends Fragment {
         fragmentListBinding.setViewmodel(listViewModel);
 
         setRetainInstance(false);
+        //测试LiveData
+        listViewModel.refresh.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                listViewModel.person.set("xxxxx");
+            }
+        });
+
+
 
         return fragmentListBinding.getRoot();
     }

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\github\AngeUnit\multi-image-selector\src\main\assets"/><source path="C:\github\AngeUnit\multi-image-selector\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="C:\github\AngeUnit\multi-image-selector\src\release\assets"/></dataSet></merger>
